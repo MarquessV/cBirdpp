@@ -4,6 +4,7 @@
 #include "Observation.h"
 #include "DataOptionalParameters.h"
 
+#include<any>
 #include <string>
 #include <vector>
 
@@ -52,9 +53,7 @@ namespace cbirdpp
        * @param hotspot set to true if results should be limited to sightings at birding hotspots. Default: false.
        * @return vector of the observations received from the request.
        */
-      std::vector<Observation> get_recent_notable_observation_in_region(const std::string& regionCode, const int& back=14, 
-                                                          const int& maxResults=0, const std::string& detail="simple",
-                                                          const bool& hotspot=false);
+      DetailedObservations get_recent_notable_observations_in_region(const std::string& regionCode, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS);
        
   };
 }
