@@ -1,4 +1,5 @@
 #include "../include/cbirdpp/cbirdpp.h"
+using cbirdpp::Observation;
 
 #include <curlpp/cURLpp.hpp>
 #include <curlpp/Easy.hpp>
@@ -57,33 +58,54 @@ namespace cbirdpp
 
   vector<Observation> Requester::get_recent_observations_in_region(const string& regionCode, const DataOptionalParameters& params)
   {
+    // Setup cURLpp handler
     cURLpp::Cleanup cleaner;
     cURLpp::Easy request_handle;
 
-    const std::string request_url = OBSURL;
+    // Create request url
+    string request_url = OBSURL + regionCode + "/recent";
 
-    std::cout << request_url << std::endl;
-    list<string> header = {"X-eBirdApiToken: " + api_key};
+    // Process optional arguments
+    vector<string> args;
+    if(params.back()) args.push_back(params.format_back());
+    if(params.cat()) args.push_back(params.format_cat());
+    if(params.maxResults()) args.push_back(params.format_maxResults());
+    if(params.includeProvisional()) args.push_back(params.format_includeProvisional());
+    if(params.hotspot()) args.push_back(params.format_hotspot());
+    
+    // Append optional arguments to request url
+    if(!args.empty()) {
+      request_url += "?";
+      for(const string& arg : args) {
+        request_url += arg;
+        if(arg != args.back()) {
+          request_url += "&";
+        }
+      }
+    }
+    
+    //std::cout << request_url << std::endl;
+
+    // Set cURLpp options
     request_handle.setOpt(cURLpp::Options::Url(request_url));
     request_handle.setOpt(cURLpp::Options::Header(true));
-    request_handle.setOpt(cURLpp::Options::HttpHeader(header));
-    std::ostringstream os("");
+    request_handle.setOpt(cURLpp::Options::HttpHeader(list<string>({"X-eBirdApiToken: " + api_key})));
+    // Create output stream for the results and perform the request
+    ostringstream os("");
     cURLpp::Options::WriteStream ws(&os);
     request_handle.setOpt(ws);
     request_handle.perform();
 
-    std::cout << os.str() << std::endl;
+    // Parse the response
+    json response = json::parse(os.str().substr(os.str().find('[')));
 
-    nlohmann::json response = json::parse(os.str().substr(os.str().find('[')));
-
-    std::vector<cbirdpp::Observation> results;
+    // Create a vector of the results and return it.
+    vector<Observation> results;
 
     for(auto x : response) {
-      std::cout << x << std::endl << std::endl;
       results.push_back(x.get<Observation>());
     }
 
     return results;
   }
-
 }

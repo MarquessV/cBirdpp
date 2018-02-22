@@ -1,8 +1,10 @@
 #include "../include/cbirdpp/cbirdpp.h"
-using cbirdpp::Requester;
+using cbirdpp::DataOptionalParameters;
+using cbirdpp::DetailType;
 using cbirdpp::Observation;
-//using cbirdpp::ObservationsInRegion;
-//using cbirdpp::NotableObservationsInRegion;
+using cbirdpp::RankType;
+using cbirdpp::Requester;
+using cbirdpp::SortType;
 
 #include "../include/nlohmann/json.hpp"
 using nlohmann::json;
@@ -50,6 +52,30 @@ int main()
   Requester requester(apikey);
 
   vector<Observation> result = requester.get_recent_observations_in_region("US-DE");
+
+  for(auto r : result) {
+    cout << r;
+  }
+
+  cout << "TESTING OPTIONAL PARAMS" << endl;
+
+  DataOptionalParameters params;
+
+  params.set_back(30);
+  params.set_cat("domestic,intergrade,slash,species");
+  params.set_maxResults(1);
+  params.set_includeProvisional(true);
+  params.set_hotspot(false);
+  params.set_detail(DetailType::full);
+  params.set_sort(SortType::species);
+  params.set_dist(50);
+  params.set_rank(RankType::create);
+
+  result = requester.get_recent_observations_in_region("US-DE", params);
+
+  for(auto r : result) {
+    cout << r;
+  }
 
   return 0;
 }

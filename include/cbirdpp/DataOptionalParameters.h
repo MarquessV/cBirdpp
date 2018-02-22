@@ -6,6 +6,10 @@
 
 namespace cbirdpp
 {
+  enum DetailType {simple=0, full};
+  enum SortType {species=0, date};
+  enum RankType {create=0, mrec};
+
   /*
    * A class providing an interface for setting optional parameters for request of the dat" variety.
    * This set of parameters can optionally be passed to the data request methods and the approrpiate optional parameters
@@ -20,15 +24,12 @@ namespace cbirdpp
       std::optional<bool> _includeProvisional;
       std::optional<bool> _hotspot;
 
-      enum DetailType {simple, full};
       std::optional<DetailType> _detail;
 
-      enum SortType {species, date};
       std::optional<SortType> _sort;
 
       std::optional<unsigned int> _dist;
 
-      enum RankType {create, mrec};
       std::optional<RankType> _rank;
 
     public:
@@ -97,6 +98,49 @@ namespace cbirdpp
        * Reset all parameters back to defaults.
        */
       void reset();
+
+      /*
+       *  Getters for each optional argument
+       */
+      const std::optional<unsigned int>& back() const;
+
+      const std::optional<std::string>& cat() const;
+
+      const std::optional<unsigned int>& maxResults() const;
+
+      const std::optional<bool>& includeProvisional() const;
+
+      const std::optional<bool>& hotspot() const;
+
+      const std::optional<DetailType>& detail() const;
+      
+      const std::optional<SortType>& sort() const;
+
+      const std::optional<unsigned int>& dist() const;
+
+      const std::optional<RankType>& rank() const;
+
+      /*
+       * Returns a string formatted for the API request. That is the form NAME=VALUE
+       */
+
+      std::string format_back() const;
+
+      std::string format_cat() const;
+
+      std::string format_maxResults() const;
+
+      std::string format_includeProvisional() const;
+
+      std::string format_hotspot() const;
+
+      std::string format_detail() const;
+
+      std::string format_sort() const;
+
+      std::string format_dist() const;
+      
+      std::string format_rank() const;
   };
 }
 

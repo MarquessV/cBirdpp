@@ -1,13 +1,18 @@
 #include "../include/cbirdpp/DataOptionalParameters.h"
 
+#include <optional>
+using std::optional;
+
 #include <set>
 using std::set;
 
 #include <string>
 using std::string;
+using std::to_string;
 
 #include <sstream>
 using std::stringstream;
+
 
 namespace cbirdpp
 {
@@ -45,11 +50,12 @@ namespace cbirdpp
       _cat.reset();
     }
     else {
+      _cat = "";
       for(auto it = categories.begin(); it != categories.end(); ++it) {
         *_cat += *it;
         *_cat += ',';
       }
-      *_cat = (*_cat).substr(0, (*_cat).substr().length()-2); 
+      *_cat = (*_cat).substr(0, (*_cat).substr().length()-1); 
     }
   }
 
@@ -75,27 +81,27 @@ namespace cbirdpp
   void DataOptionalParameters::set_hotspot(const bool hotspot)
   {
     if(!hotspot) {
-      _includeProvisional.reset();
+      _hotspot.reset();
     } else {
-      _includeProvisional = true;
+      _hotspot = true;
     }
   }
 
   void DataOptionalParameters::set_detail(const DetailType& detail)
   {
-    if(detail == simple) {
+    if(detail == DetailType::simple) {
       _detail.reset();
     } else {
-      _detail = full;
+      _detail = DetailType::full;
     }
   }
 
   void DataOptionalParameters::set_sort(const SortType& sort)
   {
-    if(sort == date) {
+    if(sort == SortType::date) {
       _sort.reset();   
     } else {
-      _sort = species;
+      _sort = SortType::species;
     }
   }
 
@@ -111,10 +117,10 @@ namespace cbirdpp
 
   void DataOptionalParameters::set_rank(const RankType& rank)
   {
-    if(rank == mrec) {
+    if(rank == RankType::mrec) {
       _rank.reset();
     } else {
-      _rank = create;
+      _rank = RankType::create;
     }
   }
 
@@ -131,4 +137,100 @@ namespace cbirdpp
     _rank.reset();
   }
 
+  const optional<unsigned int>& DataOptionalParameters::back() const
+  {
+    return _back;  
+  }
+
+  const optional<std::string>& DataOptionalParameters::cat() const
+  {
+    return _cat;  
+  }
+
+  const optional<unsigned int>& DataOptionalParameters::maxResults() const
+  {
+    return _maxResults;
+  }
+
+  const optional<bool>& DataOptionalParameters::includeProvisional() const
+  {
+    return _includeProvisional;
+  }
+
+  const optional<bool>& DataOptionalParameters::hotspot() const
+  {
+    return _hotspot;
+  }
+
+  const optional<DetailType>& DataOptionalParameters::detail() const
+  {
+    return _detail;
+  }
+
+  const optional<SortType>& DataOptionalParameters::sort() const
+  {
+    return _sort;
+  }
+  const optional<unsigned int>& DataOptionalParameters::dist() const
+  {
+    return _dist;
+  }
+  const optional<RankType>& DataOptionalParameters::rank() const
+  {
+    return _rank;
+  }
+
+  string DataOptionalParameters::format_back() const
+  {
+    if(!_back) return "";
+    return "back=" + to_string(*_back);
+  }
+
+  string DataOptionalParameters::format_cat() const
+  {
+    if(!_cat) return "";
+    return "cat=" + *_cat;
+  }
+
+  string DataOptionalParameters::format_maxResults() const
+  {
+    if(!_maxResults) return "";
+    return "maxResults=" + to_string(*_maxResults);
+  }
+
+  string DataOptionalParameters::format_includeProvisional() const
+  {
+    if(!_includeProvisional) return "";
+    return (string)"includeProvisional=" + (*_includeProvisional ? "true" : "false");
+  }
+
+  string DataOptionalParameters::format_hotspot() const
+  {
+    if(!_hotspot) return "";
+    return "hotspot=true";
+  }
+
+  string DataOptionalParameters::format_detail() const
+  {
+    if(!_detail) return "";
+    return "detail=full";
+  }
+
+  string DataOptionalParameters::format_sort() const
+  {
+    if(!_sort) return "";
+    return "sort=species";
+  }
+
+  string DataOptionalParameters::format_dist() const
+  {
+    if(!_dist) return "";
+    return "dist=" + to_string(*_dist);
+  }
+
+  string DataOptionalParameters::format_rank() const
+  {
+    if(!_rank) return "";
+    return "rank=create";
+  }
 }
