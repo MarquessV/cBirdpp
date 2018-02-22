@@ -2,3 +2,8 @@
 *.out
 *.swp
 apikey
+
+build
+lib/*
+bin/*
+

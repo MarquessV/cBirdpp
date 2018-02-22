@@ -1,30 +1,35 @@
-CC := g++
-CFLAGS := -std=c++17 -Wall -Wextra -pedantic-errors # -g
-LFLAGS := -lcurl -lcurlpp -lgtest
-
-BINDIR := bin
+CC := g++ # This is the main compiler
+# CC := clang --analyze # and comment out the linker last line for sanity
+SRCDIR := src
 BUILDDIR := build
-LIBDIR := lib
+TARGET := bin/tester
+TARGETSRC := test/tester.cpp
+ 
+SRCEXT := cpp
+SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
+OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
+CFLAGS := -std=c++17 -Wall -Wextra -pedantic-errors -g
+LIB := -lcurl -lcurlpp
+INC := -I include
 
-CBIRDPPHEADER := include/cbirdpp/cbirdpp.h
-OBJECTS := $(BUILDDIR)/data.o $(BUILDDIR)/DataOptionalParameters.o
-TESTFILE := test/tester.cpp
+CLANGTIDY := unbuffer clang-tidy -extra-arg='-std=c++17' -header-filter='.*,json.hpp' -checks='-*,bugprone-*,clang-analyzer-*,cppcoreguidelines-*,misc-*,modernize-*,performance-*,readability-*'
 
+$(TARGET): $(OBJECTS) $(TARGETSRC)
+	@echo " Linking..."
+	@echo " $(CC) $(CFLAGS) $^ -o $(TARGET) $(LIB)"; $(CC) $(CFLAGS) $^ -o $(TARGET) $(LIB)
 
-test: $(TESTFILE) $(OBJECTS)
-	$(CC) $(CFLAGS) $^ $(LFLAGS) -o bin/test.out
+$(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
+	@mkdir -p $(BUILDDIR)
+	@echo " $(CC) $(CFLAGS) $(INC) -c -o $@ $<"; $(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
-$(BUILDDIR)/data.o: $(LIBDIR)/data.cpp $(CBIRDPPHEADER)
-	$(CC) $(CFLAGS) -c $(LIBDIR)/data.cpp $(LFLAGS) -o $(BUILDDIR)/data.o
-
-$(BUILDDIR)/DataOptionalParameters.o: $(LIBDIR)/DataOptionalParameters.cpp $(CBIRDPPHEADER)
-	$(CC) $(CFLAGS) -c $(LIBDIR)/DataOptionalParameters.cpp $(LFLAGS) -o $(BUILDDIR)/DataOptionalParameters.o
+lint:
+	$(CLANGTIDY) $(SOURCES) | less
 
 run:
-	$(BINDIR)/test.out
+	./bin/tester
 
 clean:
-	rm -f $(BUILDDIR)/*
-	rm -f $(BINDIR)/*
+	@echo " Cleaning..."; 
+	@echo " $(RM) -r $(BUILDDIR) $(TARGET)"; $(RM) -r $(BUILDDIR) $(TARGET)
 
-.PHONY: clean test
+.PHONY: clean
