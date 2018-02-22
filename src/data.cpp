@@ -8,10 +8,6 @@ using cbirdpp::Observation;
 #include "../include/nlohmann/json.hpp"
 using nlohmann::json;
 
-#include <iostream>
-using std::cout;
-using std::endl;
-
 #include <list>
 using std::list;
 
@@ -67,11 +63,11 @@ namespace cbirdpp
 
     // Process optional arguments
     vector<string> args;
-    if(params.back()) args.push_back(params.format_back());
-    if(params.cat()) args.push_back(params.format_cat());
-    if(params.maxResults()) args.push_back(params.format_maxResults());
-    if(params.includeProvisional()) args.push_back(params.format_includeProvisional());
-    if(params.hotspot()) args.push_back(params.format_hotspot());
+    if(params.back()) {args.push_back(params.format_back());}
+    if(params.cat()) {args.push_back(params.format_cat());}
+    if(params.maxResults()) {args.push_back(params.format_maxResults());}
+    if(params.includeProvisional()) {args.push_back(params.format_includeProvisional());}
+    if(params.hotspot()) {args.push_back(params.format_hotspot());}
     
     // Append optional arguments to request url
     if(!args.empty()) {
@@ -102,7 +98,7 @@ namespace cbirdpp
     // Create a vector of the results and return it.
     vector<Observation> results;
 
-    for(auto x : response) {
+    for(const auto& x : response) {
       results.push_back(x.get<Observation>());
     }
 

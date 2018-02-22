@@ -21,7 +21,7 @@ namespace cbirdpp
 
   set<string> VALID_CATEGORIES = {"domestic", "form", "hybrid", "intergrade", "issf", "slash", "species", "spuh"};
 
-  DataOptionalParameters::DataOptionalParameters() {}
+  DataOptionalParameters::DataOptionalParameters() = default;
 
       /*
        * Set the back optional parameter. The amount of days to look back for observations.
@@ -29,7 +29,7 @@ namespace cbirdpp
        */
   void DataOptionalParameters::set_back(const unsigned int back)
   {
-    if(back < 1 || back > 30) throw ArgumentOutOfRange(back);
+    if(back < 1 || back > 30) {throw ArgumentOutOfRange(back);}
     if(back == 14) {
       _back.reset();
     } else {
@@ -43,7 +43,7 @@ namespace cbirdpp
     string item;
     set<string> categories;
     while(getline(ss, item, ',')) {
-      if(VALID_CATEGORIES.find(item) == VALID_CATEGORIES.end()) throw ArgumentOutOfRange(item);
+      if(VALID_CATEGORIES.find(item) == VALID_CATEGORIES.end()) {throw ArgumentOutOfRange(item);}
       categories.emplace(item);
     }
     if(categories == VALID_CATEGORIES) {
@@ -51,17 +51,18 @@ namespace cbirdpp
     }
     else {
       _cat = "";
-      for(auto it = categories.begin(); it != categories.end(); ++it) {
-        *_cat += *it;
-        *_cat += ',';
+      for(const string& s : categories) {
+        *_cat += s;
+        if(s != *categories.rbegin()) {
+          *_cat += ','; 
+        }
       }
-      *_cat = (*_cat).substr(0, (*_cat).substr().length()-1); 
     }
   }
 
   void DataOptionalParameters::set_maxResults(const unsigned int maxResults)
   {
-    if(maxResults > 10000) throw ArgumentOutOfRange(maxResults);
+    if(maxResults > 10000) {throw ArgumentOutOfRange(maxResults);}
     if(maxResults == 0) {
       _maxResults.reset();
     } else {
@@ -107,7 +108,7 @@ namespace cbirdpp
 
   void DataOptionalParameters::set_dist(const unsigned int dist)
   {
-    if(dist > 50) throw ArgumentOutOfRange(dist);
+    if(dist > 50) {throw ArgumentOutOfRange(dist);}
     if(dist == 25) {
       _dist.reset();
     } else {
@@ -182,55 +183,55 @@ namespace cbirdpp
 
   string DataOptionalParameters::format_back() const
   {
-    if(!_back) return "";
+    if(!_back) {return "";}
     return "back=" + to_string(*_back);
   }
 
   string DataOptionalParameters::format_cat() const
   {
-    if(!_cat) return "";
+    if(!_cat) {return "";}
     return "cat=" + *_cat;
   }
 
   string DataOptionalParameters::format_maxResults() const
   {
-    if(!_maxResults) return "";
+    if(!_maxResults) {return "";}
     return "maxResults=" + to_string(*_maxResults);
   }
 
   string DataOptionalParameters::format_includeProvisional() const
   {
-    if(!_includeProvisional) return "";
+    if(!_includeProvisional) {return "";}
     return (string)"includeProvisional=" + (*_includeProvisional ? "true" : "false");
   }
 
   string DataOptionalParameters::format_hotspot() const
   {
-    if(!_hotspot) return "";
+    if(!_hotspot) {return "";}
     return "hotspot=true";
   }
 
   string DataOptionalParameters::format_detail() const
   {
-    if(!_detail) return "";
+    if(!_detail) {return "";}
     return "detail=full";
   }
 
   string DataOptionalParameters::format_sort() const
   {
-    if(!_sort) return "";
+    if(!_sort) {return "";}
     return "sort=species";
   }
 
   string DataOptionalParameters::format_dist() const
   {
-    if(!_dist) return "";
+    if(!_dist) {return "";}
     return "dist=" + to_string(*_dist);
   }
 
   string DataOptionalParameters::format_rank() const
   {
-    if(!_rank) return "";
+    if(!_rank) {return "";}
     return "rank=create";
   }
 }
