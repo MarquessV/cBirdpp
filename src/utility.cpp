@@ -6,6 +6,8 @@ using nlohmann::json;
 #include <curlpp/Easy.hpp>
 #include <curlpp/Options.hpp>
 
+#include <iostream>
+
 #include <string>
 using std::string;
 
@@ -20,8 +22,6 @@ using std::vector;
 
 namespace cbirdpp
 {  
-  
-  
 
   string Requester::generate_argument_string(const vector<string>& args) const
   {

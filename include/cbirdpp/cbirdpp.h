@@ -77,6 +77,7 @@ namespace cbirdpp
       /*
        * Performs the "Recent notable observations in a region" API request.
        * The only required parameter is a string, the region code as either a eBird locId or subnational2 code.
+       * @param regionCode the eBird locId or subnational2 code of the desired region to get observations from.
        * @param params a DataOptionalParameters object with the desired optional parameters set.
        * For reference, these are the optional parameters and their ranges:
        *  regionCode the eBird locId or subnational2 code of the desired region to get observations from.
@@ -91,6 +92,7 @@ namespace cbirdpp
       /*
        * Performs the "Recent notable observations in a region" API request with the detailed format.
        * The only required parameter is a string, the region code as either a eBird locId or subnational2 code.
+       * @param regionCode the eBird locId or subnational2 code of the desired region to get observations from.
        * @param params DataOptionalParameters object with the desired optional parameters set.
        *  regionCode the eBird locId or subnational2 code of the desired region to get observations from.
        *  back the number of days back to look for observations. Range: [1-30]. Default: 14.
@@ -100,6 +102,16 @@ namespace cbirdpp
        * @return DetailedObservations a container of the observations received from the request.
        */
       DetailedObservations get_detailed_recent_notable_observations_in_region(const std::string& regionCode, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
+
+      /*
+       * Performs the "Recent observations of a species in a region" API request.
+       * There are two required parameters. The regionCode as a string, and the speciesCode as a string.
+       * @param regionCode the eBird locId or subnational2 code of the desired region to get observations from.
+       * @param speciesCode any species code in the current eBird taxonomy.
+       * @param params a DataOptionalParameters object with the desired optional parameters set.
+       *  The optional parameters for this request are: back, maxResults, includeProvisional, hotspot
+       */
+      Observations get_recent_observations_of_species_in_region(const std::string& regionCode, const std::string& speciesCode, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
        
   };
 }

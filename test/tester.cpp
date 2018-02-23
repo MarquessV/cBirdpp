@@ -78,7 +78,7 @@ int main()
 
   Requester requester(apikey);
 
-  Observations result = requester.get_recent_notable_observations_in_region("US-DE");
+  Observations result = requester.get_recent_observations_of_species_in_region("US-CA", "calqua");
 
   /*
   for(auto r : result) {
@@ -100,7 +100,7 @@ int main()
   params.set_dist(50);
   params.set_rank(RankType::create);
 
-  DetailedObservations d_result = requester.get_detailed_recent_notable_observations_in_region("US-DE", params);
+  Observations d_result = requester.get_recent_observations_of_species_in_region("US-CA", "calqua", params);
 
   for(auto r : d_result) {
     cout << r;
@@ -108,11 +108,3 @@ int main()
 
   return 0;
 }
-
-/*  Google Test Main
-int main()
-{
-  ::testing::InitGoogleTest(&argc, char **argv);
-  return RUN_ALL_TESTS();
-}
-*/

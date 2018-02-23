@@ -75,7 +75,7 @@ namespace cbirdpp
     api_key = key;
   }
 
-  Observations Requester::get_recent_observations_in_region(const string& regionCode, const DataOptionalParameters& params) const
+  Observations Requester::get_recent_observations_in_region(const string& regionCode, const DataOptionalParameters& params/*=defaults*/) const
   {
     // Process optional arguments
     vector<string> args;
@@ -94,7 +94,7 @@ namespace cbirdpp
     return observs;
   }
 
-  json Requester::get_recent_notable_setup(const string& regionCode, const DataOptionalParameters& params/*=defaults*/, bool detailed/*=false*/) const
+  json Requester::get_recent_notable_setup(const string& regionCode, const DataOptionalParameters& params, bool detailed/*=false*/) const
   {
     vector<string> args;
     if(params.back()) {args.emplace_back(params.format_back());}
@@ -113,10 +113,25 @@ namespace cbirdpp
     return observs;
   }
   
-  DetailedObservations Requester::get_detailed_recent_notable_observations_in_region(const string& regionCode, const DataOptionalParameters& params) const
+  DetailedObservations Requester::get_detailed_recent_notable_observations_in_region(const string& regionCode, const DataOptionalParameters& params/*=defaults*/) const
   {
     json response = get_recent_notable_setup(regionCode, params, true);
     auto observs = json_to_object<DetailedObservations, DetailedObservation>(response);
+    return observs;
+  }
+
+  Observations Requester::get_recent_observations_of_species_in_region(const std::string& regionCode, const std::string& speciesCode, const DataOptionalParameters& params/*defaults*/) const
+  {
+    vector<string> args;
+    if(params.back()) {args.emplace_back(params.format_back());}
+    if(params.maxResults()) {args.emplace_back(params.format_maxResults());}
+    if(params.includeProvisional()) {args.emplace_back(params.format_includeProvisional());}
+    if(params.hotspot()) {args.emplace_back(params.format_hotspot());}
+
+    string request_url = OBSURL + regionCode + "/recent/" + speciesCode + generate_argument_string(args);
+
+    json response = request_json(request_url);
+    auto observs = json_to_object<Observations, Observation>(response);
     return observs;
   }
 
