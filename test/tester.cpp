@@ -78,7 +78,7 @@ int main()
 
   Requester requester(apikey);
 
-  Observations result = requester.get_recent_observations_of_species_in_region("US-CA", "calqua");
+  Observations result = requester.get_recent_nearby_observations(37.88, -121.91);
 
   /*
   for(auto r : result) {
@@ -100,9 +100,9 @@ int main()
   params.set_dist(50);
   params.set_rank(RankType::create);
 
-  Observations d_result = requester.get_recent_observations_of_species_in_region("US-CA", "calqua", params);
+  result = requester.get_recent_nearby_observations("37.887815", "-121.910193", params);
 
-  for(auto r : d_result) {
+  for(auto r : result) {
     cout << r;
   }
 

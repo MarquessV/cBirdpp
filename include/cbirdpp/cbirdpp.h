@@ -121,9 +121,31 @@ namespace cbirdpp
        * @param speciesCode any species code in the current eBird taxonomy.
        * @param params a DataOptionalParameters object with the desired optional parameters set.
        *  The optional parameters for this request are: back, maxResults, includeProvisional, hotspot
+       *  @return Observations a container of the observations received from the request.
        */
       Observations get_recent_observations_of_species_in_region(const std::string& regionCode, const std::string& speciesCode, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
        
+      /*
+       * Performs the "Recent nearby observations" API request.
+       * There are two required parameters. The latitude and longitude as doubles (or strings).
+       * @param lat double, the latitude of the target area, [-90.0, 90.0], will be rounded or extended to two digits of precision.
+       * @param lng double, the longitude of the target area, [-180.0, 180.0], will be rounded or extended to two digits of precision.
+       * @param params a DataOptionalParameters object with the desired optional parameter set.
+       *  The optional parameters for this request are: dist, back, cat, maxResults, includeProvisional, hotspot, sort
+       * @return Observations a container of the observations received from the request.
+       */
+      Observations get_recent_nearby_observations(const double lat, const double lng, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
+
+      /*
+       * Performs the "Recent nearby observations" API request.
+       * There are two required parameters. The latitude and longitude as doubles (or strings).
+       * @param lat double, the latitude of the target area, [-90.0, 90.0], will be rounded or extended to two digits of precision.
+       * @param lng double, the longitude of the target area, [-180.0, 180.0], will be rounded or extended to two digits of precision.
+       * @param params a DataOptionalParameters object with the desired optional parameter set.
+       *  The optional parameters for this request are: dist, back, cat, maxResults, includeProvisional, hotspot, sort
+       * @return Observations a container of the observations received from the request.
+       */
+      Observations get_recent_nearby_observations(const std::string& lat, const std::string& lng, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
   };
 }
 

@@ -9,6 +9,10 @@ using cbirdpp::DetailedObservation;
 #include "../include/nlohmann/json.hpp"
 using nlohmann::json;
 
+#include <iomanip>
+using std::fixed;
+using std::setprecision;
+
 #include <iostream> //NOLINT
 using std::cout; //NOLINT
 using std::endl; //NOLINT
@@ -18,6 +22,7 @@ using std::string;
 
 #include <sstream>
 using std::ostringstream;
+using std::stringstream;
 
 #include <vector>
 using std::vector;
@@ -129,6 +134,39 @@ namespace cbirdpp
     if(params.hotspot()) {args.emplace_back(params.format_hotspot());}
 
     string request_url = OBSURL + regionCode + "/recent/" + speciesCode + generate_argument_string(args);
+
+    json response = request_json(request_url);
+    auto observs = json_to_object<Observations, Observation>(response);
+    return observs;
+  }
+
+  Observations Requester::get_recent_nearby_observations(const double lat, const double lng, const DataOptionalParameters& params) const
+  {
+    if(lat < -90.0 || lat > 90.0) {throw ArgumentOutOfRange(lat);}
+    if(lng < -180.0 || lng > 180.0) {throw ArgumentOutOfRange(lng);}
+    stringstream lat_stream, lng_stream;
+    lat_stream << fixed << setprecision(2) << lat;
+    lng_stream << fixed << setprecision(2) << lng;
+    return get_recent_nearby_observations(lat_stream.str(), lng_stream.str(), params);
+  }
+
+  Observations Requester::get_recent_nearby_observations(const string& lat, const string& lng, const DataOptionalParameters& params) const
+  {
+    if(lat.substr(lat.find('.')).length() < 2) {throw ArgumentOutOfRange(lat);}
+    if(lng.substr(lng.find('.')).length() < 2) {throw ArgumentOutOfRange(lng);}
+
+    vector<string> args;
+    args.emplace_back("lat=" + lat);
+    args.emplace_back("lng=" + lng);
+    if(params.dist()) {args.emplace_back(params.format_dist());}
+    if(params.back()) {args.emplace_back(params.format_back());}
+    if(params.cat()) {args.emplace_back(params.format_cat());}
+    if(params.maxResults()) {args.emplace_back(params.format_maxResults());}
+    if(params.includeProvisional()) {args.emplace_back(params.format_includeProvisional());}
+    if(params.hotspot()) {args.emplace_back(params.format_hotspot());}
+    if(params.sort()) {args.emplace_back(params.format_sort());}
+
+    string request_url = OBSURL + "geo/recent" + generate_argument_string(args);
 
     json response = request_json(request_url);
     auto observs = json_to_object<Observations, Observation>(response);

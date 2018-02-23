@@ -52,6 +52,13 @@ namespace cbirdpp
     size_t json_start;
     if((json_start = out_stream.str().find('[')) == string::npos) {throw cbirdpp::RequestFailed();}
 
+    /*
+    std::cout << request_url << std::endl;
+    std::cin.get();
+    std::cout << out_stream.str() << std::endl;
+    std::cin.get();
+    */
+
     json response = json::parse(out_stream.str().substr(json_start));
 
     return response;
