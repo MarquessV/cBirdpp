@@ -84,12 +84,7 @@ namespace cbirdpp
   Observations Requester::get_recent_observations_in_region(const string& regionCode, const DataOptionalParameters& params/*=defaults*/) const
   {
     // Process optional arguments
-    vector<string> args;
-    if(params.back()) {args.emplace_back(params.format_back());}
-    if(params.cat()) {args.emplace_back(params.format_cat());}
-    if(params.maxResults()) {args.emplace_back(params.format_maxResults());}
-    if(params.includeProvisional()) {args.emplace_back(params.format_includeProvisional());}
-    if(params.hotspot()) {args.emplace_back(params.format_hotspot());}
+    vector<string> args = process_args({DataParams::back, DataParams::cat, DataParams::maxResults, DataParams::includeProvisional, DataParams::hotspot}, params);
     
     // Append optional arguments to request url
     string request_url = OBSURL + regionCode + "/recent" + generate_argument_string(args);
@@ -102,11 +97,8 @@ namespace cbirdpp
 
   json Requester::get_recent_notable_setup(const string& regionCode, const DataOptionalParameters& params, bool detailed/*=false*/) const
   {
-    vector<string> args;
-    if(params.back()) {args.emplace_back(params.format_back());}
-    if(params.maxResults()) {args.emplace_back(params.format_maxResults());}
+    vector<string> args = process_args({DataParams::back, DataParams::maxResults, DataParams::hotspot}, params, detailed);
     if(detailed) {args.emplace_back("detail=full");}  // Don't trust the user to request detailed without setting the parameter.
-    if(params.hotspot()) {args.emplace_back(params.format_hotspot());}
 
     string request_url = OBSURL + regionCode + "/recent/notable" + generate_argument_string(args);
     return request_json(request_url);
@@ -128,11 +120,7 @@ namespace cbirdpp
 
   Observations Requester::get_recent_observations_of_species_in_region(const std::string& regionCode, const std::string& speciesCode, const DataOptionalParameters& params/*defaults*/) const
   {
-    vector<string> args;
-    if(params.back()) {args.emplace_back(params.format_back());}
-    if(params.maxResults()) {args.emplace_back(params.format_maxResults());}
-    if(params.includeProvisional()) {args.emplace_back(params.format_includeProvisional());}
-    if(params.hotspot()) {args.emplace_back(params.format_hotspot());}
+    vector<string> args = process_args({DataParams::back, DataParams::maxResults, DataParams::includeProvisional, DataParams::hotspot}, params);
 
     string request_url = OBSURL + regionCode + "/recent/" + speciesCode + generate_argument_string(args);
 
@@ -143,17 +131,8 @@ namespace cbirdpp
 
   Observations Requester::get_recent_nearby_observations(const double lat, const double lng, const DataOptionalParameters& params) const
   {
-    vector<string> args = generate_nearby_arguments(lat, lng);
-    if(params.dist()) {args.emplace_back(params.format_dist());}
-    if(params.back()) {args.emplace_back(params.format_back());}
-    if(params.cat()) {args.emplace_back(params.format_cat());}
-    if(params.maxResults()) {args.emplace_back(params.format_maxResults());}
-    if(params.includeProvisional()) {args.emplace_back(params.format_includeProvisional());}
-    if(params.hotspot()) {args.emplace_back(params.format_hotspot());}
-    if(params.sort()) {args.emplace_back(params.format_sort());}
-
+    vector<string> args = process_args({DataParams::dist, DataParams::back, DataParams::cat, DataParams::maxResults, DataParams::includeProvisional, DataParams::hotspot, DataParams::sort}, params, lat, lng);
     string request_url = OBSURL + "geo/recent" + generate_argument_string(args);
-
     json response = request_json(request_url);
     auto observs = json_to_object<Observations, Observation>(response);
     return observs;
@@ -161,15 +140,8 @@ namespace cbirdpp
 
   json Requester::get_recent_nearby_notable_setup(const double lat, const double lng, const DataOptionalParameters& params, bool detailed/*=false*/) const
   {
-    vector<string> args = generate_nearby_arguments(lat, lng);
-    if(params.dist()) {args.emplace_back(params.format_dist());}
-    if(params.back()) {args.emplace_back(params.format_back());}
-    if(params.maxResults()) {args.emplace_back(params.format_maxResults());}
-    if(detailed) {args.emplace_back("detail=full");}
-    if(params.hotspot()) {args.emplace_back(params.format_hotspot());}
-
+    vector<string> args = process_args({DataParams::dist, DataParams::back, DataParams::maxResults, DataParams::hotspot}, params, lat, lng, detailed);
     string request_url = OBSURL + "geo/recent/notable" + generate_argument_string(args);
-
     return request_json(request_url);
   }
 
@@ -182,7 +154,7 @@ namespace cbirdpp
 
   DetailedObservations Requester::get_detailed_recent_nearby_notable_observations(const double lat, const double lng, const DataOptionalParameters& params/*=defaults*/) const
   {
-    json response = get_recent_nearby_notable_setup(lat, lng, params);
+    json response = get_recent_nearby_notable_setup(lat, lng, params, true);
     auto observs = json_to_object<DetailedObservations, DetailedObservation>(response);
     return observs;
   }

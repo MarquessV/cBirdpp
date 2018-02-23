@@ -18,11 +18,53 @@ using std::list;
 #include <sstream>
 using std::ostringstream;
 
+#include <utility>
+using std::initializer_list;
+
 #include <vector>
 using std::vector;
 
 namespace cbirdpp
 {  
+
+  vector<string> Requester::process_args(const initializer_list<DataParams>& optional_params, const DataOptionalParameters& params, double lat, double lng, bool detailed) const
+  {
+    vector<string> args;
+    if(lat != 1000.0 && lng != 1000.0) {args = generate_nearby_arguments(lat, lng);}
+    if(detailed) {args.emplace_back("detailed=full");}
+    for(const DataParams& p : optional_params)
+    {
+      switch(p) {
+        case DataParams::back:
+          if(params.back()) {args.emplace_back(params.format_back());}
+          break;
+        case DataParams::cat:
+          if(params.cat()) {args.emplace_back(params.format_cat());}
+          break;
+        case DataParams::maxResults:
+          if(params.maxResults()) {args.emplace_back(params.format_maxResults());}
+          break;
+        case DataParams::includeProvisional:
+          if(params.includeProvisional()) {args.emplace_back(params.format_includeProvisional());}
+          break;
+        case DataParams::hotspot:
+          if(params.hotspot()) {args.emplace_back(params.format_hotspot());}
+          break;
+        case DataParams::detail:
+          if(params.detail()) {args.emplace_back(params.format_detail());}
+          break;
+        case DataParams::sort:
+          if(params.sort()) {args.emplace_back(params.format_sort());}
+          break;
+        case DataParams::dist:
+          if(params.dist()) {args.emplace_back(params.format_dist());}
+          break;
+        default:
+          throw "Somehow an invalid data parameter was given to DataOptionalParameters::process_args()";
+      }
+    }
+    return args;
+  }
 
   string Requester::generate_argument_string(const vector<string>& args) const
   {

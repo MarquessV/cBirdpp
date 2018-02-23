@@ -7,6 +7,7 @@
 #include "../nlohmann/json.hpp"
 
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace cbirdpp
@@ -22,6 +23,11 @@ namespace cbirdpp
   {
     private:
       std::string api_key;
+
+      /*
+       * Generates strings for any required and non-default optional arguments.
+       */
+      std::vector<std::string> process_args(const std::initializer_list<DataParams>& optional_params, const DataOptionalParameters& params, double lat=1000.0, double lng=1000.0, bool detailed=false) const;
 
       /*
        * Generates the list of arguments in the format required for the request URL

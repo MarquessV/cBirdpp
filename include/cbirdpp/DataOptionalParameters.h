@@ -1,15 +1,18 @@
 #ifndef CBIRDPP_PARAMETERS_H
 #define CBIRDPP_PARAMETERS_H
 
-#include <optional>
 #include "ParameterExceptions.h"
+
+#include <optional>
+#include <utility>
+#include <vector>
 
 namespace cbirdpp
 {
   enum DetailType {simple=0, full};
   enum SortType {species=0, date};
   enum RankType {create=0, mrec};
-
+  enum DataParams {back=0, cat, maxResults, includeProvisional, hotspot, detail, sort, dist, rank};
   /*
    * A class providing an interface for setting optional parameters for request of the dat" variety.
    * This set of parameters can optionally be passed to the data request methods and the approrpiate optional parameters
@@ -141,6 +144,8 @@ namespace cbirdpp
       std::string format_dist() const;
       
       std::string format_rank() const;
+
+      std::vector<std::string> process_args(const std::initializer_list<DataParams>& optional_params) const;
   };
 }
 
