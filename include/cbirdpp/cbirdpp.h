@@ -12,6 +12,17 @@
 namespace cbirdpp
 {
 
+  class RequestFailed: public std::exception
+  {
+    public:
+      RequestFailed() = default;
+
+      virtual const char* what() const throw()
+      {
+        return "Didn't receive JSON response from the API. Either there is a problem with the service, or an argument isnt't valid";
+      }
+  };
+
   extern DataOptionalParameters DATA_DEFAULT_PARAMS;
 
   /*

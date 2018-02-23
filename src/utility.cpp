@@ -49,7 +49,11 @@ namespace cbirdpp
     request_handle.setOpt(new cURLpp::Options::WriteStream(&out_stream));
     request_handle.perform();
 
-    json response = json::parse(out_stream.str().substr(out_stream.str().find('[')));
+    size_t json_start;
+    if((json_start = out_stream.str().find('[')) == string::npos) {throw cbirdpp::RequestFailed();}
+
+    json response = json::parse(out_stream.str().substr(json_start));
+
     return response;
   }
   
