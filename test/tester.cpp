@@ -78,7 +78,7 @@ int main()
 
   Requester requester(apikey);
 
-  Observations result = requester.get_recent_nearby_observations(37.88, -121.91);
+  Observations result = requester.get_recent_nearby_observations(37.8, -121.9);
 
   /*
   for(auto r : result) {
@@ -100,7 +100,7 @@ int main()
   params.set_dist(50);
   params.set_rank(RankType::create);
 
-  result = requester.get_recent_nearby_observations("37.887815", "-121.910193", params);
+  result = requester.get_recent_nearby_observations(37.887815, -121.910193, params);
 
   for(auto r : result) {
     cout << r;

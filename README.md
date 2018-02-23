@@ -8,8 +8,8 @@ A C++ library that provides an API wrapper for the eBird 2.0 API.
     - [x] Recent observations in a region
     - [x] Recent notable observations in a region
     - [x] Recent observations of a species in a region
-    - [ ] Recent nearby observations
-    - [ ] Recent nearby notable observations
+    - [x] Recent nearby observations
+    - [x] Recent nearby notable observations
     - [ ] Recent nearby obserations of a species
     - [ ] Nearest observations of a species
     - [ ] Historic observations on a date

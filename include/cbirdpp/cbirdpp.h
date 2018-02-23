@@ -12,17 +12,6 @@
 namespace cbirdpp
 {
 
-  class RequestFailed: public std::exception
-  {
-    public:
-      RequestFailed() = default;
-
-      virtual const char* what() const throw()
-      {
-        return "Didn't receive JSON response from the API. Either there is a problem with the service, or an argument isnt't valid";
-      }
-  };
-
   extern DataOptionalParameters DATA_DEFAULT_PARAMS;
 
   /*
@@ -39,6 +28,13 @@ namespace cbirdpp
        * @param args a vector of arguments to be added to the request
        */
       std::string generate_argument_string(const std::vector<std::string>& args) const;
+
+      /*
+       * Generates the arguments for "nearby" API requests which requires both latitude and longitude
+       * @param double lat, the latitude
+       * @param double lng, the longitude
+       */
+       std::vector<std::string> generate_nearby_arguments(double lat, double lng) const;
 
       /*
        * Takes a request URL and attempts to make the request
@@ -62,7 +58,16 @@ namespace cbirdpp
         return result;
       }
 
+      /*
+       * Performs common setup between get recent notable simple and detailed requests
+       */
       nlohmann::json get_recent_notable_setup(const std::string& regionCode, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS, bool detailed=false) const;
+
+      /*
+       * Performs common setup between get recent nearby notable simple and detailed requests
+       */
+      nlohmann::json get_recent_nearby_notable_setup(double lat, double lng, const DataOptionalParameters& params, bool detailed=false) const;
+
 
     public:
       /*
@@ -127,25 +132,49 @@ namespace cbirdpp
        
       /*
        * Performs the "Recent nearby observations" API request.
-       * There are two required parameters. The latitude and longitude as doubles (or strings).
-       * @param lat double, the latitude of the target area, [-90.0, 90.0], will be rounded or extended to two digits of precision.
-       * @param lng double, the longitude of the target area, [-180.0, 180.0], will be rounded or extended to two digits of precision.
+       * There are two required parameters. The latitude and longitude as doubles. This method simply converts the doubles to strings
+       * and calls the string argument version of this function.
+       * @param lat double, the latitude of the target area, [-90.0, 90.0], will be extended to two digits of precision.
+       * @param lng double, the longitude of the target area, [-180.0, 180.0], will be extended to two digits of precision.
        * @param params a DataOptionalParameters object with the desired optional parameter set.
        *  The optional parameters for this request are: dist, back, cat, maxResults, includeProvisional, hotspot, sort
        * @return Observations a container of the observations received from the request.
        */
-      Observations get_recent_nearby_observations(const double lat, const double lng, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
+      Observations get_recent_nearby_observations(double lat, double lng, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
+
+            /*
+       * Performs the "Recent nearby notable observations" API request.
+       * There are two requred parameters. The latitude and longitude as doubles, this method simply converts the doubles to strings and 
+       * calls the string argument version of this function.
+       * @param lat double, the latitude of the target area, [-90.0, 90.0], will be extended to two digits of precision.
+       * @param lng double, the longitude of the target area, [-180.0, 180.0], will be extended to two digits of precision.
+       * @param params a DataOptionalParameters object with the desired optional parameter set.
+       *   The optional parameters for this request are: dist, back, maxResults, hotspot
+       * @return Observations a container of the observations received from the request.
+       */
+      Observations get_recent_nearby_notable_observations(double lat, double lng, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
 
       /*
-       * Performs the "Recent nearby observations" API request.
-       * There are two required parameters. The latitude and longitude as doubles (or strings).
-       * @param lat double, the latitude of the target area, [-90.0, 90.0], will be rounded or extended to two digits of precision.
-       * @param lng double, the longitude of the target area, [-180.0, 180.0], will be rounded or extended to two digits of precision.
+       * Performs the "Recent nearby notable observations" API request with the detailed format
+       * There are two requred parameters. The latitude and longitude as doubles (or strings).
+       * @param lat double, the latitude of the target area, [-90.0, 90.0], will be extended to two digits of precision.
+       * @param lng double, the longitude of the target area, [-180.0, 180.0], will be extended to two digits of precision.
        * @param params a DataOptionalParameters object with the desired optional parameter set.
-       *  The optional parameters for this request are: dist, back, cat, maxResults, includeProvisional, hotspot, sort
+       *   The optional parameters for this request are: dist, back, maxResults, hotspot
        * @return Observations a container of the observations received from the request.
        */
-      Observations get_recent_nearby_observations(const std::string& lat, const std::string& lng, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
+      DetailedObservations get_detailed_recent_nearby_notable_observations(double lat, double lng, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
+  };
+  
+  class RequestFailed: public std::exception
+  {
+    public:
+      RequestFailed() = default;
+
+      virtual const char* what() const throw()
+      {
+        return "Didn't receive JSON response from the API. Either there is a problem with the service, or an argument isnt't valid";
+      }
   };
 }
 

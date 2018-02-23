@@ -10,6 +10,7 @@ using nlohmann::json;
 
 #include <string>
 using std::string;
+using std::to_string;
 
 #include <list>
 using std::list;
@@ -38,6 +39,13 @@ namespace cbirdpp
     return arguments;
   }
 
+  vector<string> Requester::generate_nearby_arguments(const double lat, const double lng) const
+  {
+    if(lat < -90.0 || lat > 90.0) {throw ArgumentOutOfRange(lat);}
+    if(lng < -180.0 || lng > 180.0) {throw ArgumentOutOfRange(lng);}
+    return {"lat=" + to_string(lat), "lng=" + to_string(lng)};
+  }
+
   json Requester::request_json(const std::string& request_url) const
   {
     cURLpp::Cleanup cleaner;
@@ -63,5 +71,6 @@ namespace cbirdpp
 
     return response;
   }
-  
+
+
 }

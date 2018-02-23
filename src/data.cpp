@@ -19,6 +19,7 @@ using std::endl; //NOLINT
 
 #include <string>
 using std::string;
+using std::to_string;
 
 #include <sstream>
 using std::ostringstream;
@@ -142,22 +143,7 @@ namespace cbirdpp
 
   Observations Requester::get_recent_nearby_observations(const double lat, const double lng, const DataOptionalParameters& params) const
   {
-    if(lat < -90.0 || lat > 90.0) {throw ArgumentOutOfRange(lat);}
-    if(lng < -180.0 || lng > 180.0) {throw ArgumentOutOfRange(lng);}
-    stringstream lat_stream, lng_stream;
-    lat_stream << fixed << setprecision(2) << lat;
-    lng_stream << fixed << setprecision(2) << lng;
-    return get_recent_nearby_observations(lat_stream.str(), lng_stream.str(), params);
-  }
-
-  Observations Requester::get_recent_nearby_observations(const string& lat, const string& lng, const DataOptionalParameters& params) const
-  {
-    if(lat.substr(lat.find('.')).length() < 2) {throw ArgumentOutOfRange(lat);}
-    if(lng.substr(lng.find('.')).length() < 2) {throw ArgumentOutOfRange(lng);}
-
-    vector<string> args;
-    args.emplace_back("lat=" + lat);
-    args.emplace_back("lng=" + lng);
+    vector<string> args = generate_nearby_arguments(lat, lng);
     if(params.dist()) {args.emplace_back(params.format_dist());}
     if(params.back()) {args.emplace_back(params.format_back());}
     if(params.cat()) {args.emplace_back(params.format_cat());}
@@ -170,6 +156,34 @@ namespace cbirdpp
 
     json response = request_json(request_url);
     auto observs = json_to_object<Observations, Observation>(response);
+    return observs;
+  }
+
+  json Requester::get_recent_nearby_notable_setup(const double lat, const double lng, const DataOptionalParameters& params, bool detailed/*=false*/) const
+  {
+    vector<string> args = generate_nearby_arguments(lat, lng);
+    if(params.dist()) {args.emplace_back(params.format_dist());}
+    if(params.back()) {args.emplace_back(params.format_back());}
+    if(params.maxResults()) {args.emplace_back(params.format_maxResults());}
+    if(detailed) {args.emplace_back("detail=full");}
+    if(params.hotspot()) {args.emplace_back(params.format_hotspot());}
+
+    string request_url = OBSURL + "geo/recent/notable" + generate_argument_string(args);
+
+    return request_json(request_url);
+  }
+
+  Observations Requester::get_recent_nearby_notable_observations(const double lat, const double lng, const DataOptionalParameters& params/*=defaults*/) const
+  {
+    json response = get_recent_nearby_notable_setup(lat, lng, params);
+    auto observs = json_to_object<Observations, Observation>(response);
+    return observs;
+  }
+
+  DetailedObservations Requester::get_detailed_recent_nearby_notable_observations(const double lat, const double lng, const DataOptionalParameters& params/*=defaults*/) const
+  {
+    json response = get_recent_nearby_notable_setup(lat, lng, params);
+    auto observs = json_to_object<DetailedObservations, DetailedObservation>(response);
     return observs;
   }
 
