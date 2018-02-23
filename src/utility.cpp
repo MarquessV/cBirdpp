@@ -25,7 +25,7 @@ namespace cbirdpp
 
   string Requester::generate_argument_string(const vector<string>& args) const
   {
-    string arguments = "";
+    string arguments;
     if(!args.empty()) {
       arguments += "?";
       for(const string& arg : args) {

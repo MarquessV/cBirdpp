@@ -13,18 +13,11 @@ using nlohmann::json;
 using std::cout; //NOLINT
 using std::endl; //NOLINT
 
-#include <list>
-using std::list;
-
 #include <string>
 using std::string;
 
 #include <sstream>
 using std::ostringstream;
-
-#include <variant>
-using std::variant;
-using std::get;
 
 #include <vector>
 using std::vector;
@@ -86,28 +79,28 @@ namespace cbirdpp
   {
     // Process optional arguments
     vector<string> args;
-    if(params.back()) {args.push_back(params.format_back());}
-    if(params.cat()) {args.push_back(params.format_cat());}
-    if(params.maxResults()) {args.push_back(params.format_maxResults());}
-    if(params.includeProvisional()) {args.push_back(params.format_includeProvisional());}
-    if(params.hotspot()) {args.push_back(params.format_hotspot());}
+    if(params.back()) {args.emplace_back(params.format_back());}
+    if(params.cat()) {args.emplace_back(params.format_cat());}
+    if(params.maxResults()) {args.emplace_back(params.format_maxResults());}
+    if(params.includeProvisional()) {args.emplace_back(params.format_includeProvisional());}
+    if(params.hotspot()) {args.emplace_back(params.format_hotspot());}
     
     // Append optional arguments to request url
     string request_url = OBSURL + regionCode + "/recent" + generate_argument_string(args);
     
     // Get the response
     json response = request_json(request_url);
-    Observations observs = json_to_object<Observations, Observation>(response);
+    auto observs = json_to_object<Observations, Observation>(response);
     return observs;
   }
 
   json Requester::get_recent_notable_setup(const string& regionCode, const DataOptionalParameters& params/*=defaults*/, bool detailed/*=false*/) const
   {
     vector<string> args;
-    if(params.back()) {args.push_back(params.format_back());}
-    if(params.maxResults()) {args.push_back(params.format_maxResults());}
-    if(detailed) {args.push_back("detail=full");}  // Don't trust the user to request detailed without setting the parameter.
-    if(params.hotspot()) {args.push_back(params.format_hotspot());}
+    if(params.back()) {args.emplace_back(params.format_back());}
+    if(params.maxResults()) {args.emplace_back(params.format_maxResults());}
+    if(detailed) {args.emplace_back("detail=full");}  // Don't trust the user to request detailed without setting the parameter.
+    if(params.hotspot()) {args.emplace_back(params.format_hotspot());}
 
     string request_url = OBSURL + regionCode + "/recent/notable" + generate_argument_string(args);
     return request_json(request_url);
@@ -116,14 +109,14 @@ namespace cbirdpp
   Observations Requester::get_recent_notable_observations_in_region(const string& regionCode, const DataOptionalParameters& params) const
   {
     json response = get_recent_notable_setup(regionCode, params);
-    Observations observs = json_to_object<Observations, Observation>(response);
+    auto observs = json_to_object<Observations, Observation>(response);
     return observs;
   }
   
   DetailedObservations Requester::get_detailed_recent_notable_observations_in_region(const string& regionCode, const DataOptionalParameters& params) const
   {
     json response = get_recent_notable_setup(regionCode, params, true);
-    DetailedObservations observs = json_to_object<DetailedObservations, DetailedObservation>(response);
+    auto observs = json_to_object<DetailedObservations, DetailedObservation>(response);
     return observs;
   }
 
