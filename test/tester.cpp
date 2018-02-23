@@ -78,11 +78,13 @@ int main()
 
   Requester requester(apikey);
 
-  cbirdpp::Observations result = requester.get_recent_notable_observations_in_region("US-DE");
+  Observations result = requester.get_recent_notable_observations_in_region("US-DE");
 
+  /*
   for(auto r : result) {
     cout << r;
   }
+  */
 
   cout << "TESTING OPTIONAL PARAMS" << endl;
 
@@ -98,7 +100,7 @@ int main()
   params.set_dist(50);
   params.set_rank(RankType::create);
 
-  cbirdpp::Observations d_result = requester.get_recent_notable_observations_in_region("US-DE", params);
+  DetailedObservations d_result = requester.get_detailed_recent_notable_observations_in_region("US-DE", params);
 
   for(auto r : d_result) {
     cout << r;

@@ -77,21 +77,13 @@ namespace cbirdpp
     target.subnational2Name = source.at("subnational2Name").get<string>();
     target.userDisplayName = source.at("userDisplayName").get<string>();
   }
-
   Requester::Requester(const string& key)
   {
     api_key = key;
   }
 
-  vector<Observation> Requester::get_recent_observations_in_region(const string& regionCode, const DataOptionalParameters& params)
+  Observations Requester::get_recent_observations_in_region(const string& regionCode, const DataOptionalParameters& params) const
   {
-    // Setup cURLpp handler
-    cURLpp::Cleanup cleaner;
-    cURLpp::Easy request_handle;
-
-    // Create request url
-    string request_url = OBSURL + regionCode + "/recent";
-
     // Process optional arguments
     vector<string> args;
     if(params.back()) {args.push_back(params.format_back());}
@@ -101,99 +93,38 @@ namespace cbirdpp
     if(params.hotspot()) {args.push_back(params.format_hotspot());}
     
     // Append optional arguments to request url
-    if(!args.empty()) {
-      request_url += "?";
-      for(const string& arg : args) {
-        request_url += arg;
-        if(arg != args.back()) {
-          request_url += "&";
-        }
-      }
-    }
+    string request_url = OBSURL + regionCode + "/recent" + generate_argument_string(args);
     
-    // Set cURLpp options
-    request_handle.setOpt(cURLpp::Options::Url(request_url));
-    request_handle.setOpt(cURLpp::Options::Header(true));
-    request_handle.setOpt(cURLpp::Options::HttpHeader(list<string>({"X-eBirdApiToken: " + api_key})));
-    // Create output stream for the results and perform the request
-    ostringstream os("");
-    cURLpp::Options::WriteStream ws(&os);
-    request_handle.setOpt(ws);
-    request_handle.perform();
-
-    // Parse the response
-    json response = json::parse(os.str().substr(os.str().find('[')));
-
-    // Create a vector of the results and return it.
-    vector<Observation> results;
-
-    for(const auto& x : response) {
-      results.push_back(x.get<Observation>());
-    }
-
-    return results;
+    // Get the response
+    json response = request_json(request_url);
+    Observations observs = json_to_object<Observations, Observation>(response);
+    return observs;
   }
 
-  DetailedObservations Requester::get_recent_notable_observations_in_region(const string& regionCode, const DataOptionalParameters& params)
+  json Requester::get_recent_notable_setup(const string& regionCode, const DataOptionalParameters& params/*=defaults*/, bool detailed/*=false*/) const
   {
-    // Setup cURLpp handler
-    cURLpp::Cleanup cleaner;
-    cURLpp::Easy request_handle;
-
-    // Create request url
-    string request_url = OBSURL + regionCode + "/recent/notable";
-
-    // Process optional arguments
     vector<string> args;
-    bool detailed = false;
     if(params.back()) {args.push_back(params.format_back());}
     if(params.maxResults()) {args.push_back(params.format_maxResults());}
-    if(params.detail()) {
-      args.push_back(params.format_detail());
-      detailed = true;
-    }
+    if(detailed) {args.push_back("detail=full");}  // Don't trust the user to request detailed without setting the parameter.
     if(params.hotspot()) {args.push_back(params.format_hotspot());}
-    
-    // Append optional arguments to request url
-    if(!args.empty()) {
-      request_url += "?";
-      for(const string& arg : args) {
-        request_url += arg;
-        if(arg != args.back()) {
-          request_url += "&";
-        }
-      }
-    }
-    
-    cout << request_url << endl;
 
-    // Set cURLpp options
-    request_handle.setOpt(cURLpp::Options::Url(request_url));
-    request_handle.setOpt(cURLpp::Options::Header(true));
-    request_handle.setOpt(cURLpp::Options::HttpHeader(list<string>({"X-eBirdApiToken: " + api_key})));
-    // Create output stream for the results and perform the request
-    ostringstream os("");
-    cURLpp::Options::WriteStream ws(&os);
-    request_handle.setOpt(ws);
-    request_handle.perform();
+    string request_url = OBSURL + regionCode + "/recent/notable" + generate_argument_string(args);
+    return request_json(request_url);
+  }
 
-    // Parse the response
-    json response = json::parse(os.str().substr(os.str().find('[')));
-
-    //cout << response.dump(4) << endl;
-
-    DetailedObservations results;
-    if(detailed) {
-      for(const auto& entry : response) {
-        results.push_back(entry.get<DetailedObservation>()); 
-      }
-    } else {
-      vector<Observation> results;
-      for(const auto& x : response) {
-        results.push_back(x.get<Observation>());
-      }
-    }
-    return results;
+  Observations Requester::get_recent_notable_observations_in_region(const string& regionCode, const DataOptionalParameters& params) const
+  {
+    json response = get_recent_notable_setup(regionCode, params);
+    Observations observs = json_to_object<Observations, Observation>(response);
+    return observs;
+  }
+  
+  DetailedObservations Requester::get_detailed_recent_notable_observations_in_region(const string& regionCode, const DataOptionalParameters& params) const
+  {
+    json response = get_recent_notable_setup(regionCode, params, true);
+    DetailedObservations observs = json_to_object<DetailedObservations, DetailedObservation>(response);
+    return observs;
   }
 
 }

@@ -47,7 +47,8 @@ namespace cbirdpp
     std::string subnational2Name;
     std::string userDisplayName;
 
-    operator Observation() const {
+    operator Observation() const
+    {
       return {speciesCode, comName, sciName, locId, locName, obsDt, howMany, lat, lng,
               obsValid, obsReviewed, locationPrivate};
     }
@@ -56,26 +57,12 @@ namespace cbirdpp
 
   struct DetailedObservations : public std::vector<DetailedObservation>
   {
+    DetailedObservations() = default;
   };
 
   struct Observations : public std::vector<Observation>
   {
-    Observations(const DetailedObservations& rhs)
-    {
-      for(const DetailedObservation& o : rhs) {
-        push_back((Observation)o);
-      }
-    }
-
-    /*
-    Observations& operator=(const DetailedObservations& rhs)
-    {
-      for(const DetailedObservation& o : rhs) {
-        push_back((Observation)o);
-      }
-      return *this;
-    } 
-    */
+    Observations() = default;
   };
 
   /*
