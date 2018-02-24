@@ -9,17 +9,12 @@ using cbirdpp::DetailedObservation;
 #include "../include/nlohmann/json.hpp"
 using nlohmann::json;
 
-#include <iomanip>
-using std::fixed;
-using std::setprecision;
-
 #include <iostream> //NOLINT
 using std::cout; //NOLINT
 using std::endl; //NOLINT
 
 #include <string>
 using std::string;
-using std::to_string;
 
 #include <sstream>
 using std::ostringstream;
@@ -76,6 +71,7 @@ namespace cbirdpp
     target.subnational2Name = source.at("subnational2Name").get<string>();
     target.userDisplayName = source.at("userDisplayName").get<string>();
   }
+
   Requester::Requester(const string& key)
   {
     api_key = key;
@@ -83,13 +79,8 @@ namespace cbirdpp
 
   Observations Requester::get_recent_observations_in_region(const string& regionCode, const DataOptionalParameters& params/*=defaults*/) const
   {
-    // Process optional arguments
     vector<string> args = process_args({DataParams::back, DataParams::cat, DataParams::maxResults, DataParams::includeProvisional, DataParams::hotspot}, params);
-    
-    // Append optional arguments to request url
     string request_url = OBSURL + regionCode + "/recent" + generate_argument_string(args);
-    
-    // Get the response
     json response = request_json(request_url);
     auto observs = json_to_object<Observations, Observation>(response);
     return observs;
@@ -98,8 +89,6 @@ namespace cbirdpp
   json Requester::get_recent_notable_setup(const string& regionCode, const DataOptionalParameters& params, bool detailed/*=false*/) const
   {
     vector<string> args = process_args({DataParams::back, DataParams::maxResults, DataParams::hotspot}, params, detailed);
-    if(detailed) {args.emplace_back("detail=full");}  // Don't trust the user to request detailed without setting the parameter.
-
     string request_url = OBSURL + regionCode + "/recent/notable" + generate_argument_string(args);
     return request_json(request_url);
   }
@@ -121,9 +110,7 @@ namespace cbirdpp
   Observations Requester::get_recent_observations_of_species_in_region(const std::string& regionCode, const std::string& speciesCode, const DataOptionalParameters& params/*defaults*/) const
   {
     vector<string> args = process_args({DataParams::back, DataParams::maxResults, DataParams::includeProvisional, DataParams::hotspot}, params);
-
     string request_url = OBSURL + regionCode + "/recent/" + speciesCode + generate_argument_string(args);
-
     json response = request_json(request_url);
     auto observs = json_to_object<Observations, Observation>(response);
     return observs;

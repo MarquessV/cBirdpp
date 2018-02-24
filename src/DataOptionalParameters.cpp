@@ -13,13 +13,6 @@ using std::to_string;
 #include <sstream>
 using std::stringstream;
 
-#include <utility>
-using std::initializer_list;
-
-#include <vector>
-using std::vector;
-
-
 namespace cbirdpp
 {
 

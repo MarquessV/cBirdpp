@@ -27,10 +27,10 @@ using std::vector;
 namespace cbirdpp
 {  
 
-  vector<string> Requester::process_args(const initializer_list<DataParams>& optional_params, const DataOptionalParameters& params, double lat, double lng, bool detailed) const
+  vector<string> Requester::process_args(const initializer_list<DataParams>& optional_params, const DataOptionalParameters& params, double lat, double lng, bool detailed, bool nearby_args/*=false*/) const
   {
     vector<string> args;
-    if(lat != 1000.0 && lng != 1000.0) {args = generate_nearby_arguments(lat, lng);}
+    if(nearby_args) {args = generate_nearby_arguments(lat, lng);}
     if(detailed) {args.emplace_back("detailed=full");}
     for(const DataParams& p : optional_params)
     {
@@ -64,6 +64,21 @@ namespace cbirdpp
       }
     }
     return args;
+  }
+
+  vector<string> Requester::process_args(const initializer_list<DataParams>& optional_params, const DataOptionalParameters& params) const
+  {
+    return process_args(optional_params, params, 0.0, 0.0, false, false);
+  }
+
+  vector<string> Requester::process_args(const initializer_list<DataParams>& optional_params, const DataOptionalParameters& params, bool detailed) const
+  {
+    return process_args(optional_params, params, 0.0, 0.0, detailed, false);
+  }
+
+  vector<string> Requester::process_args(const initializer_list<DataParams>& optional_params, const DataOptionalParameters& params, double lat, double lng, bool detailed) const
+  {
+    return process_args(optional_params, params, lat, lng, detailed, true);
   }
 
   string Requester::generate_argument_string(const vector<string>& args) const

@@ -25,10 +25,17 @@ namespace cbirdpp
       std::string api_key;
 
       /*
-       * Generates strings for any required and non-default optional arguments.
+       * Main function for processing data request arguments
+       * Every function taking a list of DataParams calls this function with the appropriate
+       * arguments set.
        */
-      std::vector<std::string> process_args(const std::initializer_list<DataParams>& optional_params, const DataOptionalParameters& params, double lat=1000.0, double lng=1000.0, bool detailed=false) const;
+      std::vector<std::string> process_args(const std::initializer_list<DataParams>& optional_params, const DataOptionalParameters& params, double lat, double lng, bool detailed, bool nearby_args) const;
 
+      std::vector<std::string> process_args(const std::initializer_list<DataParams>& optional_params, const DataOptionalParameters& params) const;
+
+      std::vector<std::string> process_args(const std::initializer_list<DataParams>& optional_params, const DataOptionalParameters& params, bool detailed) const;
+
+      std::vector<std::string> process_args(const std::initializer_list<DataParams>& optional_params, const DataOptionalParameters& params, double lat, double lng, bool detailed=false) const;
       /*
        * Generates the list of arguments in the format required for the request URL
        * @param args a vector of arguments to be added to the request
