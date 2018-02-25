@@ -4,16 +4,17 @@ A C++ library that provides an API wrapper for the eBird 2.0 API.
 ## Current Progress
 
 - [ ] Requests:
-  - [ ] data/obs
+  - [x] data/obs
     - [x] Recent observations in a region
     - [x] Recent notable observations in a region
     - [x] Recent observations of a species in a region
     - [x] Recent nearby observations
     - [x] Recent nearby notable observations
-        - Note: The detailed version of this test throws an exception. This is caused by a bug with the eBird API and should work correctly once the bug has been fixed.
+        - Note: The detailed version of this test throws an exception. Waiting on response from the eBird API team to see if this is a bug.
     - [x] Recent nearby obserations of a species
-    - [ ] Nearest observations of a species
-    - [ ] Historic observations on a date
+    - [x] Nearest observations of a species
+    - [x] Historic observations on a date
+        - Note: These requests always timeout for me, even on specifc, well formed requests. Waiting on response from the eBird API team to see if this is a bug.
   - [ ] product
     - [ ] Top 100
     - [ ] Checklist feed on a date
