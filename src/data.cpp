@@ -168,4 +168,12 @@ namespace cbirdpp
     return observs;
   }
 
+  Observations Requester::get_nearest_observations_of_species(const string& speciesCode, const double lat, const double lng, const DataOptionalParameters& params/*=defaults*/) const
+  {
+    vector<string> args = process_args({DataParams::dist, DataParams::back, DataParams::maxResults, DataParams::includeProvisional, DataParams::hotspot}, params, lat, lng);
+    string request_url = OBSURL + "geo/recent/" + speciesCode + generate_argument_string(args);
+    json response = request_json(request_url);
+    auto observs = json_to_object<Observations, Observation>(response);
+    return observs;
+  }
 }

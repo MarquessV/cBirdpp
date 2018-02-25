@@ -153,6 +153,23 @@ TEST(GetRecentNearbyObservationsOfSpeciesTest, SuccessTest)
   }
 }
 
+TEST(GetNearestObservationOfSpeciesTest, SuccessTest)
+{
+  Requester requester(APIKEY);
+  for(const pair<double,double>& coord : coords) {
+    for(const string& species : species_codes) {
+      Observations obs = requester.get_nearest_observations_of_species(species, coord.first, coord.second);
+    }
+  }
+  for(const pair<double,double>& coord : coords) {
+    for(const string& species : species_codes) {
+      for(const DataOptionalParameters& p : data_optional_params) {
+        Observations obs = requester.get_nearest_observations_of_species(species, coord.first, coord.second, p);
+      }
+    }
+  }
+}
+
 int main(int argc, char **argv)
 {
   if(!fin) {return -1;}

@@ -145,8 +145,7 @@ namespace cbirdpp
        
       /*
        * Performs the "Recent nearby observations" API request.
-       * There are two required parameters. The latitude and longitude as doubles. This method simply converts the doubles to strings
-       * and calls the string argument version of this function.
+       * There are two required parameters. The latitude and longitude as doubles.
        * @param lat double, the latitude of the target area, [-90.0, 90.0], will be extended to two digits of precision.
        * @param lng double, the longitude of the target area, [-180.0, 180.0], will be extended to two digits of precision.
        * @param params a DataOptionalParameters object with the desired optional parameter set.
@@ -157,8 +156,7 @@ namespace cbirdpp
 
             /*
        * Performs the "Recent nearby notable observations" API request.
-       * There are two requred parameters. The latitude and longitude as doubles, this method simply converts the doubles to strings and 
-       * calls the string argument version of this function.
+       * There are two requred parameters. The latitude and longitude as doubles.
        * @param lat double, the latitude of the target area, [-90.0, 90.0], will be extended to two digits of precision.
        * @param lng double, the longitude of the target area, [-180.0, 180.0], will be extended to two digits of precision.
        * @param params a DataOptionalParameters object with the desired optional parameter set.
@@ -169,7 +167,7 @@ namespace cbirdpp
 
       /*
        * Performs the "Recent nearby notable observations" API request with the detailed format
-       * There are two requred parameters. The latitude and longitude as doubles (or strings).
+       * There are two requred parameters. The latitude and longitude as doubles.
        * @param lat double, the latitude of the target area, [-90.0, 90.0], will be extended to two digits of precision.
        * @param lng double, the longitude of the target area, [-180.0, 180.0], will be extended to two digits of precision.
        * @param params a DataOptionalParameters object with the desired optional parameter set.
@@ -180,7 +178,7 @@ namespace cbirdpp
 
       /*
        * Performs the "Recent nearby observations of a species" API request.
-       * There are three requred parameters. The species code as a string, the latitude and longitude as doubles (or strings).
+       * There are three requred parameters. The species code as a string, the latitude and longitude as doubles.
        * @param speciesCode any species code in the current eBird taxonomy.
        * @param lat double, the latitude of the target area, [-90.0, 90.0], will be extended to two digits of precision.
        * @param lng double, the longitude of the target area, [-180.0, 180.0], will be extended to two digits of precision.
@@ -189,6 +187,18 @@ namespace cbirdpp
        * @return Observations a container of the observations received from the request.
        */ 
       Observations get_recent_nearby_observations_of_species(const std::string& speciesCode, double lat, double lng, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
+
+      /*
+       * Performs the "Nearest observations of a species" API request.
+       * There are two required parameters. The latitude and longitude as doubles.
+       * @param speciesCode any species code in the current eBird taxonomy.
+       * @param lat double, the latitude of the target area, [-90.0, 90.0], will be extended to two digits of precision.
+       * @param lng double, the longitude of the target area, [-180.0, 180.0], will be extended to two digits of precision.
+       * @param params a DataOptionalParameters object with the desired optional parameter set.
+       *   The optional parameters for this request are: dist, back, maxResults, includeProvisional hotspot
+       * @return Observations a container of the observations received from the request.
+       */
+      Observations get_nearest_observations_of_species(const std::string& speciesCode, double lat, double lng, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
   };
   
   class RequestFailed: public std::exception
