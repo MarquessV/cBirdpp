@@ -31,7 +31,7 @@ namespace cbirdpp
   {
     vector<string> args;
     if(nearby_args) {args = generate_nearby_arguments(lat, lng);}
-    if(detailed) {args.emplace_back("detailed=full");}
+    if(detailed) {args.emplace_back("detail=full");}
     for(const DataParams& p : optional_params)
     {
       switch(p) {
@@ -49,9 +49,6 @@ namespace cbirdpp
           break;
         case DataParams::hotspot:
           if(params.hotspot()) {args.emplace_back(params.format_hotspot());}
-          break;
-        case DataParams::detail:
-          if(params.detail()) {args.emplace_back(params.format_detail());}
           break;
         case DataParams::sort:
           if(params.sort()) {args.emplace_back(params.format_sort());}
@@ -117,16 +114,13 @@ namespace cbirdpp
     size_t json_start;
     if((json_start = out_stream.str().find('[')) == string::npos) {throw cbirdpp::RequestFailed();}
 
-    /*
-    std::cout << request_url << std::endl;
-    std::cin.get();
-    std::cout << out_stream.str() << std::endl;
-    std::cin.get();
-    */
+    try {
+      json response = json::parse(out_stream.str().substr(json_start));
+      return response;
+    } catch(...) {
+      throw RequestFailed();
+    }
 
-    json response = json::parse(out_stream.str().substr(json_start));
-
-    return response;
   }
 
 

@@ -57,10 +57,19 @@ namespace cbirdpp
     target.checklistId = source.at("checklistId").get<string>();
     target.countryCode = source.at("countryCode").get<string>();
     target.countryName = source.at("countryName").get<string>();
-    target.firstName = source.at("firstName").get<string>();
+    if(source.find("firstName") == source.end()) {
+      target.firstName = "N/A";
+    } else {
+      target.firstName = source.at("firstName").get<string>();
+    }
     target.hasComments = source.at("hasComments").get<bool>();
     target.hasRichMedia = source.at("hasRichMedia").get<bool>();
-    target.lastName = source.at("lastName").get<string>();
+    if(source.find("firstName") == source.end()) {
+      target.lastName = "N/A";
+    } else {
+      target.lastName = source.at("lastName").get<string>();
+    }
+    target.hasComments = source.at("hasComments").get<bool>();
     target.locID = source.at("locID").get<string>();
     target.obsId = source.at("obsId").get<string>();
     target.presenceNoted = source.at("presenceNoted").get<bool>();
@@ -69,7 +78,11 @@ namespace cbirdpp
     target.subnational1Name = source.at("subnational1Name").get<string>();
     target.subnational2Code = source.at("subnational2Code").get<string>();
     target.subnational2Name = source.at("subnational2Name").get<string>();
-    target.userDisplayName = source.at("userDisplayName").get<string>();
+    if(source.find("userDisplayName") == source.end()) {
+      target.userDisplayName = "N/A";
+    } else {
+      target.userDisplayName = source.at("userDisplayName").get<string>();
+    }
   }
 
   Requester::Requester(const string& key)
@@ -143,6 +156,15 @@ namespace cbirdpp
   {
     json response = get_recent_nearby_notable_setup(lat, lng, params, true);
     auto observs = json_to_object<DetailedObservations, DetailedObservation>(response);
+    return observs;
+  }
+
+  Observations Requester::get_recent_nearby_observations_of_species(const string& speciesCode, double lat, double lng, const DataOptionalParameters& params/*=defaults*/) const
+  {
+    vector<string> args = process_args({DataParams::dist, DataParams::back, DataParams::maxResults, DataParams::includeProvisional, DataParams::hotspot}, params, lat, lng);
+    string request_url = OBSURL + "geo/recent/" + speciesCode + generate_argument_string(args);
+    json response = request_json(request_url);
+    auto observs = json_to_object<Observations, Observation>(response);
     return observs;
   }
 

@@ -177,6 +177,18 @@ namespace cbirdpp
        * @return Observations a container of the observations received from the request.
        */
       DetailedObservations get_detailed_recent_nearby_notable_observations(double lat, double lng, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
+
+      /*
+       * Performs the "Recent nearby observations of a species" API request.
+       * There are three requred parameters. The species code as a string, the latitude and longitude as doubles (or strings).
+       * @param speciesCode any species code in the current eBird taxonomy.
+       * @param lat double, the latitude of the target area, [-90.0, 90.0], will be extended to two digits of precision.
+       * @param lng double, the longitude of the target area, [-180.0, 180.0], will be extended to two digits of precision.
+       * @param params a DataOptionalParameters object with the desired optional parameter set.
+       *   The optional parameters for this request are: dist, back, maxResults, includeProvisional hotspot
+       * @return Observations a container of the observations received from the request.
+       */ 
+      Observations get_recent_nearby_observations_of_species(const std::string& speciesCode, double lat, double lng, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
   };
   
   class RequestFailed: public std::exception
