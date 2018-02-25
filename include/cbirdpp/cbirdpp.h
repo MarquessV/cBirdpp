@@ -49,6 +49,14 @@ namespace cbirdpp
        */
        std::vector<std::string> generate_nearby_arguments(double lat, double lng) const;
 
+       /*
+        * Generates date string formatted for the API request url
+        * @param int year, the year
+        * @param int month, the month
+        * @param int day, the day
+        */
+       std::string generate_date(int year, int month, int day) const;
+
       /*
        * Takes a request URL and attempts to make the request
        * @param request_url the url of the request to be made
@@ -81,6 +89,10 @@ namespace cbirdpp
        */
       nlohmann::json get_recent_nearby_notable_setup(double lat, double lng, const DataOptionalParameters& params, bool detailed=false) const;
 
+      /*
+       * Performs common setup between get historic observations request
+       */
+      nlohmann::json get_historic_observations_on_date_setup(const std::string& regionCode, int year, int month, int date, const DataOptionalParameters& params) const;
 
     public:
       /*
@@ -195,10 +207,37 @@ namespace cbirdpp
        * @param lat double, the latitude of the target area, [-90.0, 90.0], will be extended to two digits of precision.
        * @param lng double, the longitude of the target area, [-180.0, 180.0], will be extended to two digits of precision.
        * @param params a DataOptionalParameters object with the desired optional parameter set.
-       *   The optional parameters for this request are: dist, back, maxResults, includeProvisional hotspot
+       *   The optional parameters for this request are: dist, back, maxResults, includeProvisional, hotspot
        * @return Observations a container of the observations received from the request.
        */
-      Observations get_nearest_observations_of_species(const std::string& speciesCode, double lat, double lng, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
+      Observations get_nearest_observations_of_species(const std::string& regionCode, double lat, double lng, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
+
+      /* 
+       * Performs "Historic observations on a date" API request.
+       * There are for required variables: The region code as a string, and the year, month, and day as ints.
+       * @param regionCode the eBird locId or subnational2 code of the desired region to get observations from.
+       * @param year the year of the desired date [1800-current]
+       * @param month the month of the desired date [1-12]
+       * @param day the day of the desired date [1-31]
+       * @param params a DataOptionalParameters object with the desired optional parameter set.
+       *   The optional parameters for this request are: rank, cat, maxResults, includeProvisional, hotspot
+       * @return Observations a container of the observations received from the request.
+       */
+      Observations get_historic_observations_on_date(const std::string& regionCode, int year, int month, int day, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
+
+      /*     
+       * Performs "Historic observations on a date" API request with detailed results
+       * There are for required variables: The region code as a string, and the year, month, and day as ints.
+       * @param regionCode the eBird locId or subnational2 code of the desired region to get observations from.
+       * @param year the year of the desired date [1800-current]
+       * @param month the month of the desired date [1-12]
+       * @param day the day of the desired date [1-31]
+       * @param params a DataOptionalParameters object with the desired optional parameter set.
+       *   The optional parameters for this request are: rank, cat, maxResults, includeProvisional, hotspot
+       * @return DetailedObservations a container of the observations received from the request.
+       */
+      DetailedObservations get_detailed_historic_observations_on_date(const std::string& regionCode, int year, int month, int day, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
+
   };
   
   class RequestFailed: public std::exception

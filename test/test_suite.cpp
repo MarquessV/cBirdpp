@@ -170,6 +170,32 @@ TEST(GetNearestObservationOfSpeciesTest, SuccessTest)
   }
 }
 
+TEST(GetHistoricObservationsOnDateTest, SuccessTest)
+{
+  Requester requester(APIKEY); 
+  for(const string& region : region_codes) {
+    Observations obs = requester.get_historic_observations_on_date(region, 2014, 2, 14);
+  }
+  for(const string& region : region_codes) {
+    for(const DataOptionalParameters& p : data_optional_params) {
+      Observations obs = requester.get_historic_observations_on_date(region, 2014, 2, 14, p);
+    }
+  }
+}
+
+TEST(GetDetailedHistoricObservationsOnDateTest, SuccessTest)
+{
+  Requester requester(APIKEY); 
+  for(const string& region : region_codes) {
+    DetailedObservations obs = requester.get_detailed_historic_observations_on_date(region, 2014, 2, 14);
+  }
+  for(const string& region : region_codes) {
+    for(const DataOptionalParameters& p : data_optional_params) {
+      DetailedObservations obs = requester.get_detailed_historic_observations_on_date(region, 2014, 2, 14, p);
+    }
+  }
+}
+
 int main(int argc, char **argv)
 {
   if(!fin) {return -1;}

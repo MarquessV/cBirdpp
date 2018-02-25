@@ -176,4 +176,26 @@ namespace cbirdpp
     auto observs = json_to_object<Observations, Observation>(response);
     return observs;
   }
+
+
+  json Requester::get_historic_observations_on_date_setup(const string& regionCode, int year, int month, int day, const DataOptionalParameters& params) const
+  {
+    vector<string> args = process_args({DataParams::rank, DataParams::cat, DataParams::maxResults, DataParams::includeProvisional, DataParams::hotspot}, params);
+    string request_url = OBSURL + regionCode + "/historic/" + generate_date(year, month, day) + generate_argument_string(args);
+    return request_json(request_url);
+  }
+
+  Observations Requester::get_historic_observations_on_date(const string& regionCode, int year, int month, int day, const DataOptionalParameters& params/*=defaults*/) const
+  {
+    json response = get_historic_observations_on_date_setup(regionCode, year, month, day, params);
+    auto observs = json_to_object<Observations, Observation>(response);
+    return observs;
+  }
+
+  DetailedObservations Requester::get_detailed_historic_observations_on_date(const string& regionCode, int year, int month, int day, const DataOptionalParameters& params/*=defaults*/) const
+  {
+    json response = get_historic_observations_on_date_setup(regionCode, year, month, day, params);
+    auto observs = json_to_object<DetailedObservations, DetailedObservation>(response);
+    return observs;
+  }
 }

@@ -100,6 +100,11 @@ namespace cbirdpp
     return {"lat=" + to_string(lat), "lng=" + to_string(lng)};
   }
 
+  string Requester::generate_date(int year, int month, int day) const
+  {
+    return to_string(year) + "/" + to_string(month) + "/" + to_string(day);
+  }
+
   json Requester::request_json(const std::string& request_url) const
   {
     cURLpp::Cleanup cleaner;
