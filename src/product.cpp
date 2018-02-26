@@ -23,9 +23,6 @@ using std::to_string;
 using std::ostringstream;
 using std::stringstream;
 
-#include <vector>
-using std::vector;
-
 const string PRODURL = "https://ebird.org/ws2.0/product/";
 
 using nlohmann::json;
@@ -87,7 +84,7 @@ namespace cbirdpp
     }
 
     json response = request_json(request_url);
-    Top100 result = json_to_object<Top100, Top100Base>(response);
+    auto result = json_to_object<Top100, Top100Base>(response);
     return result;
   }
 

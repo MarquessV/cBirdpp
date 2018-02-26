@@ -95,7 +95,7 @@ namespace cbirdpp
       /*
        * Performs common setup between get historic observations request
        */
-      nlohmann::json get_historic_observations_on_date_setup(const std::string& regionCode, int year, int month, int date, const DataOptionalParameters& params) const;
+      nlohmann::json get_historic_observations_on_date_setup(const std::string& regionCode, int year, int month, int day, const DataOptionalParameters& params) const;
 
     public:
       /*
@@ -216,7 +216,7 @@ namespace cbirdpp
        *   The optional parameters for this request are: dist, back, maxResults, includeProvisional, hotspot
        * @return Observations a container of the observations received from the request.
        */
-      Observations get_nearest_observations_of_species(const std::string& regionCode, double lat, double lng, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
+      Observations get_nearest_observations_of_species(const std::string& speciesCode, double lat, double lng, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
 
       /* 
        * Performs "Historic observations on a date" API request.

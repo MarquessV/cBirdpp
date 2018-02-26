@@ -193,4 +193,5 @@ namespace cbirdpp
     auto observs = json_to_object<DetailedObservations, DetailedObservation>(response);
     return observs;
   }
+
 }

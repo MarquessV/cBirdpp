@@ -2,6 +2,7 @@
 #define CBIRDPP_CHECKLIST_H
 
 #include <string>
+#include <vector>
 
 namespace cbirdpp
 {
@@ -33,6 +34,12 @@ namespace cbirdpp
     bool isHotspot;
     std::string hierarchicalName;
   };
+
+  struct Checklists : public std::vector<Checklist>
+  {
+    Checklists() = default;
+  };
+
 }
 
 #endif
