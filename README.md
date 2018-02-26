@@ -16,7 +16,7 @@ A C++ library that provides an API wrapper for the eBird 2.0 API.
     - [x] Historic observations on a date
         - Note: These requests always timeout for me, even on specifc, well formed requests. Waiting on response from the eBird API team to see if this is a bug.
   - [ ] product
-    - [ ] Top 100
+    - [x] Top 100
     - [ ] Checklist feed on a date
     - [ ] Recent checklists feed
     - [ ] Regional statistics on a date
