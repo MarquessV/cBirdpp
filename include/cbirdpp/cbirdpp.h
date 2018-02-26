@@ -1,8 +1,11 @@
 #ifndef CBIRDPP_CBIRDPP_H
 #define CBIRDPP_CBIRDPP_H
 
+#include "Checklist.h"
 #include "DataOptionalParameters.h"
 #include "Observation.h"
+#include "RegionalStats.h"
+#include "Top100.h"
 
 #include "../nlohmann/json.hpp"
 
@@ -99,7 +102,10 @@ namespace cbirdpp
        * The only available constructor, takes an api key as a string.
        * @param key the api key the requester will use to formulate requests
        */
-      Requester(const std::string& key);
+      Requester(const std::string& key)
+      {
+        api_key = key;
+      }
 
       /*
        * Performs the "Recent observations in a region" API request.
@@ -214,7 +220,7 @@ namespace cbirdpp
 
       /* 
        * Performs "Historic observations on a date" API request.
-       * There are for required variables: The region code as a string, and the year, month, and day as ints.
+       * There are four required variables: The region code as a string, and the year, month, and day as ints.
        * @param regionCode the eBird locId or subnational2 code of the desired region to get observations from.
        * @param year the year of the desired date [1800-current]
        * @param month the month of the desired date [1-12]
@@ -227,7 +233,7 @@ namespace cbirdpp
 
       /*     
        * Performs "Historic observations on a date" API request with detailed results
-       * There are for required variables: The region code as a string, and the year, month, and day as ints.
+       * There are four required variables: The region code as a string, and the year, month, and day as ints.
        * @param regionCode the eBird locId or subnational2 code of the desired region to get observations from.
        * @param year the year of the desired date [1800-current]
        * @param month the month of the desired date [1-12]
@@ -237,6 +243,20 @@ namespace cbirdpp
        * @return DetailedObservations a container of the observations received from the request.
        */
       DetailedObservations get_detailed_historic_observations_on_date(const std::string& regionCode, int year, int month, int day, const DataOptionalParameters& params=DATA_DEFAULT_PARAMS) const;
+
+      /* 
+       * Performs "Get Top 100" API request.
+       * There are four required variables: The region code as a string, and the year, month, and day as ints.
+       * @param regionCode the eBird locId or subnational2 code of the desired region to get observations from.
+       * @param year the year of the desired date [1800-current]
+       * @param month the month of the desired date [1-12]
+       * @param day the day of the desired date [1-31]
+       * @param checklistSort=false bool set to true to sort by number of completed checklists
+       * @param maxResults=100 unsigned int, set to [1+] to get more or less results
+       */
+      Top100 get_top_100(const std::string& regionCode, int year, int month, int day, bool checklistSort=false, unsigned int maxResults=100) const;
+
+      Top100 get_top_100(const std::string& regionCode, int year, int month, int day, unsigned int maxResults) const;
 
   };
   

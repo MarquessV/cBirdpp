@@ -1,0 +1,775 @@
+[
+    {
+        "profileHandle": "OTE2MDQw",
+        "userDisplayName": "Elizabeth Cavazos",
+        "numSpecies": 141,
+        "numCompleteChecklists": 0,
+        "rowNum": 1,
+        "userId": "USER916040"
+    },
+    {
+        "profileHandle": "NTQ5MzQ3",
+        "userDisplayName": "Tammy McQuade",
+        "numSpecies": 136,
+        "numCompleteChecklists": 0,
+        "rowNum": 2,
+        "userId": "USER549347"
+    },
+    {
+        "profileHandle": "NjUxODMx",
+        "userDisplayName": "Eary Warren",
+        "numSpecies": 136,
+        "numCompleteChecklists": 0,
+        "rowNum": 2,
+        "userId": "USER651831"
+    },
+    {
+        "profileHandle": "MjI3NTUz",
+        "userDisplayName": "David Pereksta",
+        "numSpecies": 136,
+        "numCompleteChecklists": 0,
+        "rowNum": 2,
+        "userId": "USER227553"
+    },
+    {
+        "profileHandle": "NDIxODI3",
+        "userDisplayName": "David McQuade",
+        "numSpecies": 136,
+        "numCompleteChecklists": 0,
+        "rowNum": 2,
+        "userId": "USER421827"
+    },
+    {
+        "profileHandle": "Njc4NDgw",
+        "userDisplayName": "Jennifer Warren",
+        "numSpecies": 136,
+        "numCompleteChecklists": 0,
+        "rowNum": 2,
+        "userId": "USER678480"
+    },
+    {
+        "profileHandle": "ODA4OTY4",
+        "userDisplayName": "Lucas Corneliussen",
+        "numSpecies": 134,
+        "numCompleteChecklists": 0,
+        "rowNum": 7,
+        "userId": "USER808968"
+    },
+    {
+        "userDisplayName": "Henry Dillingham",
+        "numSpecies": 134,
+        "numCompleteChecklists": 0,
+        "rowNum": 7,
+        "userId": "USER252252"
+    },
+    {
+        "profileHandle": "MjM3Njc2",
+        "userDisplayName": "Colin Dillingham",
+        "numSpecies": 134,
+        "numCompleteChecklists": 0,
+        "rowNum": 7,
+        "userId": "USER237676"
+    },
+    {
+        "profileHandle": "MzEzNjQ1",
+        "userDisplayName": "Donna Pomeroy",
+        "numSpecies": 126,
+        "numCompleteChecklists": 0,
+        "rowNum": 10,
+        "userId": "USER313645"
+    },
+    {
+        "profileHandle": "OTEyMjk",
+        "userDisplayName": "Jennifer Rycenga",
+        "numSpecies": 126,
+        "numCompleteChecklists": 0,
+        "rowNum": 10,
+        "userId": "USER91229"
+    },
+    {
+        "profileHandle": "MTY3MTc0",
+        "userDisplayName": "Rita Carratello",
+        "numSpecies": 125,
+        "numCompleteChecklists": 0,
+        "rowNum": 12,
+        "userId": "USER167174"
+    },
+    {
+        "profileHandle": "MTA3OTY4",
+        "userDisplayName": "Don Roberson",
+        "numSpecies": 125,
+        "numCompleteChecklists": 0,
+        "rowNum": 12,
+        "userId": "USER107968"
+    },
+    {
+        "userDisplayName": "Doug Pomeroy",
+        "numSpecies": 125,
+        "numCompleteChecklists": 0,
+        "rowNum": 12,
+        "userId": "USER340479"
+    },
+    {
+        "userDisplayName": "Ginny Marshall",
+        "numSpecies": 125,
+        "numCompleteChecklists": 0,
+        "rowNum": 12,
+        "userId": "USER203361"
+    },
+    {
+        "profileHandle": "MTg3MTU5",
+        "userDisplayName": "Carole Rose",
+        "numSpecies": 122,
+        "numCompleteChecklists": 0,
+        "rowNum": 16,
+        "userId": "USER187159"
+    },
+    {
+        "profileHandle": "NTQ0MDQy",
+        "userDisplayName": "Nicola Salino",
+        "numSpecies": 122,
+        "numCompleteChecklists": 0,
+        "rowNum": 16,
+        "userId": "USER544042"
+    },
+    {
+        "profileHandle": "MjY0Nzcw",
+        "userDisplayName": "Leslie Flint",
+        "numSpecies": 122,
+        "numCompleteChecklists": 0,
+        "rowNum": 16,
+        "userId": "USER264770"
+    },
+    {
+        "profileHandle": "ODUzNTgz",
+        "userDisplayName": "Marc Kramer",
+        "numSpecies": 121,
+        "numCompleteChecklists": 0,
+        "rowNum": 19,
+        "userId": "USER853583"
+    },
+    {
+        "userDisplayName": "Eliana Ardila Ardila",
+        "numSpecies": 120,
+        "numCompleteChecklists": 0,
+        "rowNum": 20,
+        "userId": "USER189212"
+    },
+    {
+        "profileHandle": "MTY4MjM3",
+        "userDisplayName": "Michael Rieser",
+        "numSpecies": 118,
+        "numCompleteChecklists": 0,
+        "rowNum": 21,
+        "userId": "USER168237"
+    },
+    {
+        "profileHandle": "NTA4ODAy",
+        "userDisplayName": "Peggy Macres",
+        "numSpecies": 118,
+        "numCompleteChecklists": 0,
+        "rowNum": 21,
+        "userId": "USER508802"
+    },
+    {
+        "userDisplayName": "Alex Rinkert",
+        "numSpecies": 117,
+        "numCompleteChecklists": 0,
+        "rowNum": 23,
+        "userId": "USER189374"
+    },
+    {
+        "profileHandle": "NTIyMzE1",
+        "userDisplayName": "Scott Sorby",
+        "numSpecies": 117,
+        "numCompleteChecklists": 0,
+        "rowNum": 23,
+        "userId": "USER522315"
+    },
+    {
+        "profileHandle": "MTY2NzQ",
+        "userDisplayName": "Tim Lenz",
+        "numSpecies": 117,
+        "numCompleteChecklists": 0,
+        "rowNum": 23,
+        "userId": "USER16674"
+    },
+    {
+        "profileHandle": "NDI4NDcy",
+        "userDisplayName": "Gabriel Tarantino",
+        "numSpecies": 117,
+        "numCompleteChecklists": 0,
+        "rowNum": 23,
+        "userId": "USER428472"
+    },
+    {
+        "profileHandle": "NDMyOTI3",
+        "userDisplayName": "David T\u00f8nnessen",
+        "numSpecies": 116,
+        "numCompleteChecklists": 0,
+        "rowNum": 27,
+        "userId": "USER432927"
+    },
+    {
+        "profileHandle": "MjAzNDY5",
+        "userDisplayName": "Tom Unsicker",
+        "numSpecies": 114,
+        "numCompleteChecklists": 0,
+        "rowNum": 28,
+        "userId": "USER203469"
+    },
+    {
+        "profileHandle": "MjQ1MTU",
+        "userDisplayName": "Donald Kirker",
+        "numSpecies": 113,
+        "numCompleteChecklists": 0,
+        "rowNum": 29,
+        "userId": "USER24515"
+    },
+    {
+        "profileHandle": "MjgwNDUx",
+        "userDisplayName": "dessi sieburth",
+        "numSpecies": 113,
+        "numCompleteChecklists": 0,
+        "rowNum": 29,
+        "userId": "USER280451"
+    },
+    {
+        "userDisplayName": "connie unsicker",
+        "numSpecies": 113,
+        "numCompleteChecklists": 0,
+        "rowNum": 29,
+        "userId": "USER791494"
+    },
+    {
+        "userDisplayName": "Aaron Gabbe",
+        "numSpecies": 112,
+        "numCompleteChecklists": 0,
+        "rowNum": 32,
+        "userId": "USER263320"
+    },
+    {
+        "profileHandle": "MTQxNTU1",
+        "userDisplayName": "Bruce Barrett",
+        "numSpecies": 111,
+        "numCompleteChecklists": 0,
+        "rowNum": 33,
+        "userId": "USER141555"
+    },
+    {
+        "userDisplayName": "Ralph Baker",
+        "numSpecies": 108,
+        "numCompleteChecklists": 0,
+        "rowNum": 34,
+        "userId": "USER215766"
+    },
+    {
+        "userDisplayName": "David Mandell",
+        "numSpecies": 108,
+        "numCompleteChecklists": 0,
+        "rowNum": 34,
+        "userId": "USER303797"
+    },
+    {
+        "profileHandle": "OTYzMzg4",
+        "userDisplayName": "Robert Thoren",
+        "numSpecies": 108,
+        "numCompleteChecklists": 0,
+        "rowNum": 34,
+        "userId": "USER963388"
+    },
+    {
+        "profileHandle": "MjI1NTI",
+        "userDisplayName": "Roger Zachary",
+        "numSpecies": 107,
+        "numCompleteChecklists": 0,
+        "rowNum": 37,
+        "userId": "USER22552"
+    },
+    {
+        "profileHandle": "MjgyMDA5",
+        "userDisplayName": "Jay Withgott",
+        "numSpecies": 107,
+        "numCompleteChecklists": 0,
+        "rowNum": 37,
+        "userId": "USER282009"
+    },
+    {
+        "profileHandle": "NTMzMTc2",
+        "userDisplayName": "Dominic Le Croissette",
+        "numSpecies": 107,
+        "numCompleteChecklists": 0,
+        "rowNum": 37,
+        "userId": "USER533176"
+    },
+    {
+        "userDisplayName": "Mark  Kudrav",
+        "numSpecies": 106,
+        "numCompleteChecklists": 0,
+        "rowNum": 40,
+        "userId": "USER193088"
+    },
+    {
+        "profileHandle": "OTUzODA",
+        "userDisplayName": "Jeff Bouton",
+        "numSpecies": 105,
+        "numCompleteChecklists": 0,
+        "rowNum": 41,
+        "userId": "USER95380"
+    },
+    {
+        "userDisplayName": "Denny Van Horn",
+        "numSpecies": 105,
+        "numCompleteChecklists": 0,
+        "rowNum": 41,
+        "userId": "USER163116"
+    },
+    {
+        "profileHandle": "MjExNzEw",
+        "userDisplayName": "Daniel Tinoco",
+        "numSpecies": 104,
+        "numCompleteChecklists": 0,
+        "rowNum": 43,
+        "userId": "USER211710"
+    },
+    {
+        "profileHandle": "MjAxMzg3",
+        "userDisplayName": "Colin Dobson",
+        "numSpecies": 103,
+        "numCompleteChecklists": 0,
+        "rowNum": 44,
+        "userId": "USER201387"
+    },
+    {
+        "profileHandle": "MTkyMTM1",
+        "userDisplayName": "Annie Meyer",
+        "numSpecies": 103,
+        "numCompleteChecklists": 0,
+        "rowNum": 44,
+        "userId": "USER192135"
+    },
+    {
+        "profileHandle": "MjY2Nzg3",
+        "userDisplayName": "Dane Fagundes",
+        "numSpecies": 103,
+        "numCompleteChecklists": 0,
+        "rowNum": 44,
+        "userId": "USER266787"
+    },
+    {
+        "profileHandle": "NDI5MzUy",
+        "userDisplayName": "Ruben  Stoll",
+        "numSpecies": 103,
+        "numCompleteChecklists": 0,
+        "rowNum": 44,
+        "userId": "USER429352"
+    },
+    {
+        "userDisplayName": "Alexander Robinson",
+        "numSpecies": 103,
+        "numCompleteChecklists": 0,
+        "rowNum": 44,
+        "userId": "USER438553"
+    },
+    {
+        "userDisplayName": "Brant Julius",
+        "numSpecies": 102,
+        "numCompleteChecklists": 0,
+        "rowNum": 49,
+        "userId": "USER428869"
+    },
+    {
+        "profileHandle": "NTc2MjY",
+        "userDisplayName": "Richard Cimino",
+        "numSpecies": 102,
+        "numCompleteChecklists": 0,
+        "rowNum": 49,
+        "userId": "USER57626"
+    },
+    {
+        "profileHandle": "MTkxMDU",
+        "userDisplayName": "Brian Sullivan",
+        "numSpecies": 102,
+        "numCompleteChecklists": 0,
+        "rowNum": 49,
+        "userId": "USER19105"
+    },
+    {
+        "profileHandle": "MTMyNjc",
+        "userDisplayName": "Kitty ONeil",
+        "numSpecies": 101,
+        "numCompleteChecklists": 0,
+        "rowNum": 52,
+        "userId": "USER13267"
+    },
+    {
+        "profileHandle": "NzI5MDgx",
+        "userDisplayName": "Conor McMahon",
+        "numSpecies": 101,
+        "numCompleteChecklists": 0,
+        "rowNum": 52,
+        "userId": "USER729081"
+    },
+    {
+        "profileHandle": "NjA5NTU3",
+        "userDisplayName": "Alan  Troyer",
+        "numSpecies": 101,
+        "numCompleteChecklists": 0,
+        "rowNum": 52,
+        "userId": "USER609557"
+    },
+    {
+        "profileHandle": "NjI1MTAy",
+        "userDisplayName": "Bill Pelletier",
+        "numSpecies": 101,
+        "numCompleteChecklists": 0,
+        "rowNum": 52,
+        "userId": "USER625102"
+    },
+    {
+        "userDisplayName": "Mark Scheel",
+        "numSpecies": 101,
+        "numCompleteChecklists": 0,
+        "rowNum": 52,
+        "userId": "USER123794"
+    },
+    {
+        "profileHandle": "MTExMDQ3",
+        "userDisplayName": "Debi Shearwater",
+        "numSpecies": 100,
+        "numCompleteChecklists": 0,
+        "rowNum": 57,
+        "userId": "USER111047"
+    },
+    {
+        "userDisplayName": "Janet Bodle",
+        "numSpecies": 100,
+        "numCompleteChecklists": 0,
+        "rowNum": 57,
+        "userId": "USER421960"
+    },
+    {
+        "userDisplayName": "Roxanne Featherly",
+        "numSpecies": 100,
+        "numCompleteChecklists": 0,
+        "rowNum": 57,
+        "userId": "USER166729"
+    },
+    {
+        "profileHandle": "NDA5MTYz",
+        "userDisplayName": "David Wilhelm",
+        "numSpecies": 100,
+        "numCompleteChecklists": 0,
+        "rowNum": 57,
+        "userId": "USER409163"
+    },
+    {
+        "profileHandle": "Nzk0OA",
+        "userDisplayName": "Eric VanderWerf",
+        "numSpecies": 100,
+        "numCompleteChecklists": 0,
+        "rowNum": 57,
+        "userId": "USER7948"
+    },
+    {
+        "profileHandle": "MjQ4MDk2",
+        "userDisplayName": "Andrew Orgill",
+        "numSpecies": 99,
+        "numCompleteChecklists": 0,
+        "rowNum": 62,
+        "userId": "USER248096"
+    },
+    {
+        "profileHandle": "MzA4MjA3",
+        "userDisplayName": "Adam Crutcher",
+        "numSpecies": 98,
+        "numCompleteChecklists": 0,
+        "rowNum": 63,
+        "userId": "USER308207"
+    },
+    {
+        "profileHandle": "MTY2Njc5",
+        "userDisplayName": "Bob Toleno",
+        "numSpecies": 98,
+        "numCompleteChecklists": 0,
+        "rowNum": 63,
+        "userId": "USER166679"
+    },
+    {
+        "userDisplayName": "Petra Hockey",
+        "numSpecies": 98,
+        "numCompleteChecklists": 0,
+        "rowNum": 63,
+        "userId": "USER350831"
+    },
+    {
+        "userDisplayName": "Janet Scheel",
+        "numSpecies": 98,
+        "numCompleteChecklists": 0,
+        "rowNum": 63,
+        "userId": "USER203566"
+    },
+    {
+        "userDisplayName": "Louis Kreemer",
+        "numSpecies": 97,
+        "numCompleteChecklists": 0,
+        "rowNum": 67,
+        "userId": "USER557249"
+    },
+    {
+        "userDisplayName": "Graham Hutchison",
+        "numSpecies": 97,
+        "numCompleteChecklists": 0,
+        "rowNum": 67,
+        "userId": "USER223264"
+    },
+    {
+        "userDisplayName": "kent johnson",
+        "numSpecies": 97,
+        "numCompleteChecklists": 0,
+        "rowNum": 67,
+        "userId": "USER178876"
+    },
+    {
+        "profileHandle": "NDI0MDQ4",
+        "userDisplayName": "Joshua  Glant",
+        "numSpecies": 97,
+        "numCompleteChecklists": 0,
+        "rowNum": 67,
+        "userId": "USER424048"
+    },
+    {
+        "profileHandle": "MTIxMzAw",
+        "userDisplayName": "Bob Schallmann",
+        "numSpecies": 97,
+        "numCompleteChecklists": 0,
+        "rowNum": 67,
+        "userId": "USER121300"
+    },
+    {
+        "profileHandle": "MTI0NDY2",
+        "userDisplayName": "Scott Ramos",
+        "numSpecies": 97,
+        "numCompleteChecklists": 0,
+        "rowNum": 67,
+        "userId": "USER124466"
+    },
+    {
+        "profileHandle": "MTcxNTY0",
+        "userDisplayName": "Juli Chamberlin",
+        "numSpecies": 97,
+        "numCompleteChecklists": 0,
+        "rowNum": 67,
+        "userId": "USER171564"
+    },
+    {
+        "profileHandle": "Mjk4Mjc0",
+        "userDisplayName": "Kim Moore",
+        "numSpecies": 96,
+        "numCompleteChecklists": 0,
+        "rowNum": 74,
+        "userId": "USER298274"
+    },
+    {
+        "userDisplayName": "Roxie Rochat",
+        "numSpecies": 96,
+        "numCompleteChecklists": 0,
+        "rowNum": 74,
+        "userId": "USER133063"
+    },
+    {
+        "profileHandle": "MjQ0NzUx",
+        "userDisplayName": "Gary Martindale",
+        "numSpecies": 96,
+        "numCompleteChecklists": 0,
+        "rowNum": 74,
+        "userId": "USER244751"
+    },
+    {
+        "profileHandle": "MjY4ODA",
+        "userDisplayName": "Adam Dudley",
+        "numSpecies": 96,
+        "numCompleteChecklists": 0,
+        "rowNum": 74,
+        "userId": "USER26880"
+    },
+    {
+        "userDisplayName": "V L Kirby",
+        "numSpecies": 95,
+        "numCompleteChecklists": 0,
+        "rowNum": 78,
+        "userId": "USER87248"
+    },
+    {
+        "profileHandle": "NTM4NDE0",
+        "userDisplayName": "Merryl Edelstein",
+        "numSpecies": 95,
+        "numCompleteChecklists": 0,
+        "rowNum": 78,
+        "userId": "USER538414"
+    },
+    {
+        "userDisplayName": "Robin Diaz",
+        "numSpecies": 95,
+        "numCompleteChecklists": 0,
+        "rowNum": 78,
+        "userId": "USER54593"
+    },
+    {
+        "profileHandle": "MTQxMjY1",
+        "userDisplayName": "Sharon Hull",
+        "numSpecies": 95,
+        "numCompleteChecklists": 0,
+        "rowNum": 78,
+        "userId": "USER141265"
+    },
+    {
+        "userDisplayName": "Earl Lebow",
+        "numSpecies": 95,
+        "numCompleteChecklists": 0,
+        "rowNum": 78,
+        "userId": "USER267055"
+    },
+    {
+        "profileHandle": "MjI2MTQ",
+        "userDisplayName": "Michael Woodruff",
+        "numSpecies": 95,
+        "numCompleteChecklists": 0,
+        "rowNum": 78,
+        "userId": "USER22614"
+    },
+    {
+        "profileHandle": "MzM1OTc4",
+        "userDisplayName": "Cooper Scollan",
+        "numSpecies": 95,
+        "numCompleteChecklists": 0,
+        "rowNum": 78,
+        "userId": "USER335978"
+    },
+    {
+        "profileHandle": "MTAzNjgy",
+        "userDisplayName": "Magill Weber",
+        "numSpecies": 94,
+        "numCompleteChecklists": 0,
+        "rowNum": 85,
+        "userId": "USER103682"
+    },
+    {
+        "profileHandle": "MTMwMDE3",
+        "userDisplayName": "Susan Kelly",
+        "numSpecies": 94,
+        "numCompleteChecklists": 0,
+        "rowNum": 85,
+        "userId": "USER130017"
+    },
+    {
+        "profileHandle": "MjM4NDE3",
+        "userDisplayName": "Scott Simmons",
+        "numSpecies": 94,
+        "numCompleteChecklists": 0,
+        "rowNum": 85,
+        "userId": "USER238417"
+    },
+    {
+        "profileHandle": "ODE5MDY0",
+        "userDisplayName": "Garrett Lau",
+        "numSpecies": 93,
+        "numCompleteChecklists": 0,
+        "rowNum": 88,
+        "userId": "USER819064"
+    },
+    {
+        "profileHandle": "MTIyNTQ5",
+        "userDisplayName": "Michael Hardee",
+        "numSpecies": 93,
+        "numCompleteChecklists": 0,
+        "rowNum": 88,
+        "userId": "USER122549"
+    },
+    {
+        "profileHandle": "MTc2NjQ5",
+        "userDisplayName": "Steve Tucker",
+        "numSpecies": 93,
+        "numCompleteChecklists": 0,
+        "rowNum": 88,
+        "userId": "USER176649"
+    },
+    {
+        "profileHandle": "MjA1MzQw",
+        "userDisplayName": "Roger Woodruff",
+        "numSpecies": 93,
+        "numCompleteChecklists": 0,
+        "rowNum": 88,
+        "userId": "USER205340"
+    },
+    {
+        "profileHandle": "MTAyNzk3",
+        "userDisplayName": "Millie and Peter Thomas",
+        "numSpecies": 92,
+        "numCompleteChecklists": 0,
+        "rowNum": 92,
+        "userId": "USER102797"
+    },
+    {
+        "profileHandle": "MTYwNDk2",
+        "userDisplayName": "Jay Packer",
+        "numSpecies": 92,
+        "numCompleteChecklists": 0,
+        "rowNum": 92,
+        "userId": "USER160496"
+    },
+    {
+        "userDisplayName": "Teri Zambon True",
+        "numSpecies": 92,
+        "numCompleteChecklists": 0,
+        "rowNum": 92,
+        "userId": "USER240954"
+    },
+    {
+        "profileHandle": "NDA5OTUz",
+        "userDisplayName": "Laura Wilson",
+        "numSpecies": 92,
+        "numCompleteChecklists": 0,
+        "rowNum": 92,
+        "userId": "USER409953"
+    },
+    {
+        "profileHandle": "MzA3NTU4",
+        "userDisplayName": "Isaiah Nugent",
+        "numSpecies": 91,
+        "numCompleteChecklists": 0,
+        "rowNum": 96,
+        "userId": "USER307558"
+    },
+    {
+        "userDisplayName": "Peter Gaede",
+        "numSpecies": 91,
+        "numCompleteChecklists": 0,
+        "rowNum": 96,
+        "userId": "USER221434"
+    },
+    {
+        "profileHandle": "Mjc2ODA3",
+        "userDisplayName": "Bob Dunn",
+        "numSpecies": 91,
+        "numCompleteChecklists": 0,
+        "rowNum": 96,
+        "userId": "USER276807"
+    },
+    {
+        "profileHandle": "ODYwNDk",
+        "userDisplayName": "Phil Kahler",
+        "numSpecies": 90,
+        "numCompleteChecklists": 0,
+        "rowNum": 99,
+        "userId": "USER86049"
+    },
+    {
+        "profileHandle": "NjIyODU1",
+        "userDisplayName": "Casey Storey",
+        "numSpecies": 90,
+        "numCompleteChecklists": 0,
+        "rowNum": 99,
+        "userId": "USER622855"
+    }
+]

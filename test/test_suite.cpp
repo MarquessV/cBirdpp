@@ -5,6 +5,7 @@ using cbirdpp::Observations;
 using cbirdpp::RankType;
 using cbirdpp::Requester;
 using cbirdpp::SortType;
+using cbirdpp::Top100;
 
 #include <gtest/gtest.h>
 
@@ -24,7 +25,7 @@ std::ifstream fin("resources/apikey");
 std::string APIKEY;
 
 // One of each type of region code: Country code, locID, subnational1, subnational2
-vector<string> region_codes = {"US", "L3938360", "US-CA", "US-CA-075"};
+vector<string> region_codes = {"US", "L3938360", "US-CA"/*, "US-CA-075"*/};
 vector<string> species_codes = {"calqua"};
 vector<pair<double, double>> coords = { {37.881619, -121.914099}, {37.8, -121.9} };
 
@@ -193,6 +194,17 @@ TEST(GetDetailedHistoricObservationsOnDateTest, SuccessTest)
     for(const DataOptionalParameters& p : data_optional_params) {
       DetailedObservations obs = requester.get_detailed_historic_observations_on_date(region, 2014, 2, 14, p);
     }
+  }
+}
+
+TEST(GetTop100Test, SuccessTest)
+{
+  Requester requester(APIKEY); 
+  for(const string& region : region_codes) {
+    Top100 top = requester.get_top_100(region, 2018, 1, 1);
+    top = requester.get_top_100(region, 2018, 1, 1, true);
+    top = requester.get_top_100(region, 2018, 1, 1, true, 5);
+    top = requester.get_top_100(region, 2018, 1, 1, false, 5);
   }
 }
 

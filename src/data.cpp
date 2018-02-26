@@ -85,11 +85,6 @@ namespace cbirdpp
     }
   }
 
-  Requester::Requester(const string& key)
-  {
-    api_key = key;
-  }
-
   Observations Requester::get_recent_observations_in_region(const string& regionCode, const DataOptionalParameters& params/*=defaults*/) const
   {
     vector<string> args = process_args({DataParams::back, DataParams::cat, DataParams::maxResults, DataParams::includeProvisional, DataParams::hotspot}, params);
