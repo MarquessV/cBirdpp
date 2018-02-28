@@ -6,6 +6,7 @@ using cbirdpp::DataSortType;
 using cbirdpp::DetailedObservations;
 using cbirdpp::Observations;
 using cbirdpp::RankType;
+using cbirdpp::RegionalStats;
 using cbirdpp::Requester;
 using cbirdpp::SortType;
 using cbirdpp::Top100;
@@ -229,6 +230,14 @@ TEST(GetRecentChecklistsFeed, SuccessTest)
   for(const string& region : region_codes) {
     Checklists checklist = requester.get_recent_checklists_feed(region);
     checklist = requester.get_recent_checklists_feed(region, 15);
+  }
+}
+
+TEST(GetRegionalStatisticsOnDateTest, SuccessTest)
+{
+  Requester requester(APIKEY); 
+  for(const string& region : region_codes) {
+    RegionalStats stats = requester.get_regional_statistics_on_date(region, 2018, 1, 1);
   }
 }
 

@@ -136,4 +136,13 @@ namespace cbirdpp
     auto result = json_to_object<Checklists, Checklist>(response);
     return result;
   }
+
+  RegionalStats Requester::get_regional_statistics_on_date(const string& regionCode, unsigned int year, unsigned int month, unsigned int day)
+  {
+    string request_url = PRODURL + "stats/" + regionCode + "/" + generate_date(year, month, day);
+
+    json response = request_json(request_url);
+    RegionalStats result = response.get<RegionalStats>();
+    return result;
+  }
 }

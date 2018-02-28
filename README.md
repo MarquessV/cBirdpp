@@ -15,11 +15,11 @@ A C++ library that provides an API wrapper for the eBird 2.0 API.
     - [x] Nearest observations of a species
     - [x] Historic observations on a date
         - Note: These requests always timeout for me, even on specific, well formed requests. Waiting on response from the eBird API team to see if this is a bug.
-  - [ ] product
+  - [x] product
     - [x] Top 100
     - [x] Checklist feed on a date
     - [x] Recent checklists feed
-    - [ ] Regional statistics on a date
+    - [x] Regional statistics on a date
   - [ ] ref/geo
     - [ ] Adjacent Regions
   - [ ] ref/hotspot

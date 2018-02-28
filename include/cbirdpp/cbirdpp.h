@@ -277,12 +277,23 @@ namespace cbirdpp
 
       /*
        * Performs the "recent checklists feed" API request.
-       * There is one required variable, the regionce code as a string.
+       * There is one required variable, the regione code as a string.
        * @param regionCode the eBird locId or subnational2 code of the desired region to get observations from.
        * @param maxResults=10 optional, the maximum number of results to return
        * @return Checklists, a container for the results
        */
       Checklists get_recent_checklists_feed(const std::string& regionCode, unsigned int maxResults=10);
+
+      /*
+       * Performs the "regional statistics on a date" API request.
+       * There are four required variables: The region code as a string, and the year, month, and day as ints.
+       * @param regionCode the eBird locId or subnational2 code of the desired region to get observations from.
+       * @param year the year of the desired date [1800-current]
+       * @param month the month of the desired date [1-12]
+       * @param day the day of the desired date [1-31]
+       * @return Checklists, a container for the results
+       */
+      RegionalStats get_regional_statistics_on_date(const std::string& regionCode, unsigned int year, unsigned int month, unsigned int day);
 
   };
   
