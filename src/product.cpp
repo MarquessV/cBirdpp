@@ -142,7 +142,7 @@ namespace cbirdpp
     string request_url = PRODURL + "stats/" + regionCode + "/" + generate_date(year, month, day);
 
     json response = request_json(request_url);
-    RegionalStats result = response.get<RegionalStats>();
+    auto result = response.get<RegionalStats>();
     return result;
   }
 }
