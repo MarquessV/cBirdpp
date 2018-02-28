@@ -1,5 +1,8 @@
 #include "../include/cbirdpp/cbirdpp.h"
+using cbirdpp::Checklist;
+using cbirdpp::Checklists;
 using cbirdpp::DataOptionalParameters;
+using cbirdpp::DataSortType;
 using cbirdpp::DetailedObservations;
 using cbirdpp::Observations;
 using cbirdpp::RankType;
@@ -208,6 +211,17 @@ TEST(GetTop100Test, SuccessTest)
   }
 }
 
+TEST(GetChecklistFeedOnDateTest, SuccessTest)
+{
+  Requester requester(APIKEY); 
+  for(const string& region : region_codes) {
+    Checklists checklist = requester.get_checklist_feed_on_date(region, 2018, 1, 1);
+    checklist = requester.get_checklist_feed_on_date(region, 2018, 1, 1, SortType::creation_dt);
+    checklist = requester.get_checklist_feed_on_date(region, 2018, 1, 1, SortType::creation_dt, 5);
+    checklist = requester.get_checklist_feed_on_date(region, 2018, 1, 1, 5);
+  }
+}
+
 int main(int argc, char **argv)
 {
   if(!fin) {return -1;}
@@ -219,7 +233,7 @@ int main(int argc, char **argv)
   data_optional_params[0].set_maxResults(10000);
   data_optional_params[0].set_includeProvisional(true);
   data_optional_params[0].set_hotspot(true);
-  data_optional_params[0].set_sort(SortType::species);
+  data_optional_params[0].set_sort(DataSortType::species);
   data_optional_params[0].set_dist(50);
   data_optional_params[0].set_rank(RankType::create);
 
@@ -228,7 +242,7 @@ int main(int argc, char **argv)
   data_optional_params[1].set_maxResults(1);
   data_optional_params[1].set_includeProvisional(true);
   data_optional_params[1].set_hotspot(true);
-  data_optional_params[1].set_sort(SortType::species);
+  data_optional_params[1].set_sort(DataSortType::species);
   data_optional_params[1].set_dist(50);
   data_optional_params[1].set_rank(RankType::create);
 

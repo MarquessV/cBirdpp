@@ -21,8 +21,8 @@ namespace cbirdpp
     std::string obsTime;
     std::string obsMonth;
     unsigned int obsDay;
-    unsigned int year;
-    std::string locName;
+    unsigned int obsYear;
+    std::string name;
     double latitude;
     double longitude;
     std::string countryCode;

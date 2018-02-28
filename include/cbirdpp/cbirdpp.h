@@ -16,6 +16,8 @@
 namespace cbirdpp
 {
 
+  enum SortType {obs_dt=0, creation_dt};
+
   extern DataOptionalParameters DATA_DEFAULT_PARAMS;
 
   /*
@@ -257,6 +259,20 @@ namespace cbirdpp
       Top100 get_top_100(const std::string& regionCode, int year, int month, int day, bool checklistSort=false, unsigned int maxResults=100) const;
 
       Top100 get_top_100(const std::string& regionCode, int year, int month, int day, unsigned int maxResults) const;
+
+      /*
+       * Performs "Checklist feed on date" API request.
+       * There are four required variables: The region code as a string, and the year, month, and day as ints.
+       * @param regionCode the eBird locId or subnational2 code of the desired region to get observations from.
+       * @param year the year of the desired date [1800-current]
+       * @param month the month of the desired date [1-12]
+       * @param day the day of the desired date [1-31]
+       * @param sortKey whether to sort results by latest observation date or by latest creation date {obs_dt | creation_dt}
+       * @param maxResults the maximum number of checklists to show [1-200]
+       */
+      Checklists get_checklist_feed_on_date(const std::string& regionCode, int year, int month, int day, SortType sortKey=SortType::obs_dt, unsigned int maxResults=10);
+
+      Checklists get_checklist_feed_on_date(const std::string& regionCode, int year, int month, int day, unsigned int maxResults);
 
   };
   

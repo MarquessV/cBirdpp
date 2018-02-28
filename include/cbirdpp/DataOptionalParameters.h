@@ -10,7 +10,7 @@
 namespace cbirdpp
 {
   enum DetailType {simple=0, full};
-  enum SortType {species=0, date};
+  enum DataSortType {species=0, date};
   enum RankType {create=0, mrec};
   enum DataParams {back=0, cat, maxResults, includeProvisional, hotspot, detail, sort, dist, rank};
   /*
@@ -29,7 +29,7 @@ namespace cbirdpp
 
       std::optional<DetailType> _detail;
 
-      std::optional<SortType> _sort;
+      std::optional<DataSortType> _sort;
 
       std::optional<unsigned int> _dist;
 
@@ -80,9 +80,9 @@ namespace cbirdpp
 
       /*
        * Set the sort optional parameter. You can sort by species or date.
-       * @param sort a SortType enum, range: [species|date], default: date
+       * @param sort a DataSortType enum, range: [species|date], default: date
        */
-      void set_sort(const SortType& sort);
+      void set_sort(const DataSortType& sort);
 
       /*
        * Set the dist optional parameter. The radial distance in kilometers from the region to get observations from.
@@ -117,7 +117,7 @@ namespace cbirdpp
 
       const std::optional<DetailType>& detail() const;
       
-      const std::optional<SortType>& sort() const;
+      const std::optional<DataSortType>& sort() const;
 
       const std::optional<unsigned int>& dist() const;
 

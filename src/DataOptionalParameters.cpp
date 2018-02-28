@@ -96,12 +96,12 @@ namespace cbirdpp
     }
   }
 
-  void DataOptionalParameters::set_sort(const SortType& sort)
+  void DataOptionalParameters::set_sort(const DataSortType& sort)
   {
-    if(sort == SortType::date) {
+    if(sort == DataSortType::date) {
       _sort.reset();   
     } else {
-      _sort = SortType::species;
+      _sort = DataSortType::species;
     }
   }
 
@@ -167,7 +167,7 @@ namespace cbirdpp
     return _detail;
   }
 
-  const optional<SortType>& DataOptionalParameters::sort() const
+  const optional<DataSortType>& DataOptionalParameters::sort() const
   {
     return _sort;
   }

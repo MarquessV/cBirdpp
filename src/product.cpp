@@ -51,14 +51,21 @@ namespace cbirdpp
     target.userDisplayName = source.at("userDisplayName").get<string>();
     target.numSpecies = source.at("numSpecies").get<unsigned int>();
     target.obsDt = source.at("obsDt").get<string>();
-    target.countryCode = source.at("countryCode").get<string>();
-    target.countryName = source.at("countryName").get<string>();
-    target.subnational1Name = source.at("subnational1Name").get<string>();
-    target.subnational1Code = source.at("subnational1Code").get<string>();
-    target.subnational2Name = source.at("subnational2Name").get<string>();
-    target.subnational2Code = source.at("subnational2Code").get<string>();
-    target.isHotspot = source.at("isHotspot").get<bool>();
-    target.hierarchicalName = source.at("hierarchicalName").get<string>();
+    target.obsTime = source.at("obsTime").get<string>();
+    target.obsMonth = source.at("obsMonth").get<string>();
+    target.obsDay = source.at("obsDay").get<unsigned int>();
+    target.obsYear = source.at("obsYear").get<unsigned int>();
+    target.name = source.at("loc").at("name").get<string>();
+    target.latitude = source.at("loc").at("latitude").get<double>();
+    target.longitude = source.at("loc").at("longitude").get<double>();
+    target.countryCode = source.at("loc").at("countryCode").get<string>();
+    target.countryName = source.at("loc").at("countryName").get<string>();
+    target.subnational1Name = source.at("loc").at("subnational1Name").get<string>();
+    target.subnational1Code = source.at("loc").at("subnational1Code").get<string>();
+    target.subnational2Name = source.at("loc").at("subnational2Name").get<string>();
+    target.subnational2Code = source.at("loc").at("subnational2Code").get<string>();
+    target.isHotspot = source.at("loc").at("isHotspot").get<bool>();
+    target.hierarchicalName = source.at("loc").at("hierarchicalName").get<string>();
   }
 
   void from_json(const json& source, RegionalStats& target)
@@ -79,7 +86,7 @@ namespace cbirdpp
           request_url += "&maxResults=" + to_string(maxResults);
         }
       } else {
-        request_url += "&maxResults=" + to_string(maxResults);
+        request_url += "maxResults=" + to_string(maxResults);
       }
     }
 
@@ -92,5 +99,29 @@ namespace cbirdpp
   {
     return get_top_100(regionCode, year, month, day, false, maxResults);
   }
+  
+  Checklists Requester::get_checklist_feed_on_date(const std::string& regionCode, int year, int month, int day, SortType sortKey, unsigned int maxResults)
+  {
+    string request_url = PRODURL + "lists/" + regionCode + "/" + generate_date(year, month, day);    
+    if(sortKey != SortType::obs_dt || maxResults != 10) {
+      request_url += "?";
+      if(sortKey != SortType::obs_dt) {
+        request_url += "sortKey=creation_dt";
+        if(maxResults != 10) {
+          request_url += "&maxResults=" + to_string(maxResults);
+        } else {
+          request_url += "maxResults=" + to_string(maxResults);
+        }
+      } 
+    } 
 
+    json response = request_json(request_url);
+    auto result = json_to_object<Checklists, Checklist>(response);
+    return result;
+  }
+
+  Checklists Requester::get_checklist_feed_on_date(const std::string& regionCode, int year, int month, int day, unsigned int maxResults)
+  {
+    return get_checklist_feed_on_date(regionCode, year, month, day, SortType::obs_dt, maxResults);
+  }
 }
