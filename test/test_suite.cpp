@@ -222,6 +222,16 @@ TEST(GetChecklistFeedOnDateTest, SuccessTest)
   }
 }
 
+TEST(GetRecentChecklistsFeed, SuccessTest)
+{
+
+  Requester requester(APIKEY); 
+  for(const string& region : region_codes) {
+    Checklists checklist = requester.get_recent_checklists_feed(region);
+    checklist = requester.get_recent_checklists_feed(region, 15);
+  }
+}
+
 int main(int argc, char **argv)
 {
   if(!fin) {return -1;}

@@ -18,7 +18,7 @@ A C++ library that provides an API wrapper for the eBird 2.0 API.
   - [ ] product
     - [x] Top 100
     - [x] Checklist feed on a date
-    - [ ] Recent checklists feed
+    - [x] Recent checklists feed
     - [ ] Regional statistics on a date
   - [ ] ref/geo
     - [ ] Adjacent Regions

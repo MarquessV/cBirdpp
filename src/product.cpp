@@ -100,7 +100,7 @@ namespace cbirdpp
     return get_top_100(regionCode, year, month, day, false, maxResults);
   }
   
-  Checklists Requester::get_checklist_feed_on_date(const std::string& regionCode, int year, int month, int day, SortType sortKey, unsigned int maxResults)
+  Checklists Requester::get_checklist_feed_on_date(const string& regionCode, int year, int month, int day, SortType sortKey, unsigned int maxResults)
   {
     string request_url = PRODURL + "lists/" + regionCode + "/" + generate_date(year, month, day);    
     if(sortKey != SortType::obs_dt || maxResults != 10) {
@@ -120,8 +120,20 @@ namespace cbirdpp
     return result;
   }
 
-  Checklists Requester::get_checklist_feed_on_date(const std::string& regionCode, int year, int month, int day, unsigned int maxResults)
+  Checklists Requester::get_checklist_feed_on_date(const string& regionCode, int year, int month, int day, unsigned int maxResults)
   {
     return get_checklist_feed_on_date(regionCode, year, month, day, SortType::obs_dt, maxResults);
+  }
+
+  Checklists Requester::get_recent_checklists_feed(const string& regionCode, unsigned int maxResults)
+  {
+    string request_url = PRODURL + "lists/" + regionCode;
+    if(maxResults != 10) {
+      request_url += "?maxResults=" + to_string(maxResults);
+    }
+
+    json response = request_json(request_url);
+    auto result = json_to_object<Checklists, Checklist>(response);
+    return result;
   }
 }

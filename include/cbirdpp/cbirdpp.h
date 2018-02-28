@@ -269,10 +269,20 @@ namespace cbirdpp
        * @param day the day of the desired date [1-31]
        * @param sortKey whether to sort results by latest observation date or by latest creation date {obs_dt | creation_dt}
        * @param maxResults the maximum number of checklists to show [1-200]
+       * @return Checklists, a container for the results
        */
       Checklists get_checklist_feed_on_date(const std::string& regionCode, int year, int month, int day, SortType sortKey=SortType::obs_dt, unsigned int maxResults=10);
 
       Checklists get_checklist_feed_on_date(const std::string& regionCode, int year, int month, int day, unsigned int maxResults);
+
+      /*
+       * Performs the "recent checklists feed" API request.
+       * There is one required variable, the regionce code as a string.
+       * @param regionCode the eBird locId or subnational2 code of the desired region to get observations from.
+       * @param maxResults=10 optional, the maximum number of results to return
+       * @return Checklists, a container for the results
+       */
+      Checklists get_recent_checklists_feed(const std::string& regionCode, unsigned int maxResults=10);
 
   };
   
