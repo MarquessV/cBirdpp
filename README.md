@@ -1,6 +1,8 @@
 # cBirdpp
 A C++ library that provides an API wrapper for the eBird 2.0 API.
 
+*The more I get into this, the more it becomes clear that the 2.0 version of the API is unfinished. Until it matures, I see no point in using the 2.0 API over the 1.1 version of the API. I will consider revisiting this project as version 2.0 of the API matures.*
+
 ## Current Progress
 
 - [ ] Requests:
